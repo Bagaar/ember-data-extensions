@@ -1,4 +1,4 @@
-ember-data-bagaaravel
+@bagaar/ember-data-bagaaravel
 ==============================================================================
 
 [Short description of the addon.]
@@ -15,7 +15,7 @@ Installation
 ------------------------------------------------------------------------------
 
 ```
-ember install ember-data-bagaaravel
+ember install @bagaar/ember-data-bagaaravel
 ```
 
 

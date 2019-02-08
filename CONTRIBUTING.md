@@ -3,7 +3,7 @@
 ## Installation
 
 * `git clone <repository-url>`
-* `cd ember-data-bagaaravel`
+* `cd @bagaar/ember-data-bagaaravel`
 * `npm install`
 
 ## Linting
