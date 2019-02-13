@@ -1,6 +1,5 @@
 import PaginationSupportSerializerMixin from '@bagaar/ember-data-bagaaravel/mixins/pagination-support-serializer';
 import JSONAPIBagaaravelSerializer from '@bagaar/ember-data-bagaaravel/serializers/json-api-bagaaravel';
-import EmberObject from '@ember/object';
 import JSONAPIAdapter from 'ember-data/adapters/json-api';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
