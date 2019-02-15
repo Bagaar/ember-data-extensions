@@ -2,6 +2,7 @@ import RelationshipSupportAdapterMixin from '@bagaar/ember-data-bagaaravel/mixin
 import JSONAPIAdapter from 'ember-data/adapters/json-api';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
+import createExistingRecord from '../../helpers/create-existing-record';
 
 module('Unit | Mixin | relationship-support-adapter', function (hooks) {
   setupTest(hooks);
@@ -18,13 +19,10 @@ module('Unit | Mixin | relationship-support-adapter', function (hooks) {
     this.owner.register('adapter:application', Adapter);
 
     let store = this.owner.lookup('service:store');
-    let existingUser = store.createRecord('user', { id: 1 });
-
-    store.pushPayload(existingUser.serialize({ includeId: true }));
+    let existingUser = createExistingRecord(store, 'user');
 
     await existingUser.save({
       adapterOptions: {
-        isSavingRelationship: true,
         relationshipName: 'projects',
       },
     });
