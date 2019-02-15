@@ -11,18 +11,18 @@ module('Unit | Mixin | relationship-support-serializer', function (hooks) {
   test('saving a record', async function (assert) {
     let serialized;
 
-    let Adapter = JSONAPIAdapter.extend({
+    let UserAdapter = JSONAPIAdapter.extend({
       ajax(url, type, options) {
         serialized = options.data;
       },
     });
 
-    let Serializer = JSONAPIBagaaravelSerializer.extend(
+    let UserSerializer = JSONAPIBagaaravelSerializer.extend(
       RelationshipSupportSerializerMixin,
     );
 
-    this.owner.register('adapter:application', Adapter);
-    this.owner.register('serializer:application', Serializer);
+    this.owner.register('adapter:user', UserAdapter);
+    this.owner.register('serializer:user', UserSerializer);
 
     let store = this.owner.lookup('service:store');
     let existingUser = createExistingRecord(store, 'user', {
@@ -45,18 +45,18 @@ module('Unit | Mixin | relationship-support-serializer', function (hooks) {
   test('saving a belongsTo relationship', async function (assert) {
     let serialized;
 
-    let Adapter = JSONAPIAdapter.extend({
+    let UserAdapter = JSONAPIAdapter.extend({
       ajax(url, type, options) {
         serialized = options.data;
       },
     });
 
-    let Serializer = JSONAPIBagaaravelSerializer.extend(
+    let UserSerializer = JSONAPIBagaaravelSerializer.extend(
       RelationshipSupportSerializerMixin,
     );
 
-    this.owner.register('adapter:application', Adapter);
-    this.owner.register('serializer:application', Serializer);
+    this.owner.register('adapter:user', UserAdapter);
+    this.owner.register('serializer:user', UserSerializer);
 
     let store = this.owner.lookup('service:store');
     let existingUser = createExistingRecord(store, 'user');
@@ -84,18 +84,18 @@ module('Unit | Mixin | relationship-support-serializer', function (hooks) {
   test('saving an hasMany relationship', async function (assert) {
     let serialized;
 
-    let Adapter = JSONAPIAdapter.extend({
+    let UserAdapter = JSONAPIAdapter.extend({
       ajax(url, type, options) {
         serialized = options.data;
       },
     });
 
-    let Serializer = JSONAPIBagaaravelSerializer.extend(
+    let UserSerializer = JSONAPIBagaaravelSerializer.extend(
       RelationshipSupportSerializerMixin,
     );
 
-    this.owner.register('adapter:application', Adapter);
-    this.owner.register('serializer:application', Serializer);
+    this.owner.register('adapter:user', UserAdapter);
+    this.owner.register('serializer:user', UserSerializer);
 
     let store = this.owner.lookup('service:store');
     let existingUser = createExistingRecord(store, 'user');

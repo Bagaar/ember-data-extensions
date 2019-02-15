@@ -10,13 +10,13 @@ module('Unit | Mixin | relationship-support-adapter', function (hooks) {
   test('it generates the correct update url', async function (assert) {
     let urlForUpdateRecord;
 
-    let Adapter = JSONAPIAdapter.extend(RelationshipSupportAdapterMixin, {
+    let UserAdapter = JSONAPIAdapter.extend(RelationshipSupportAdapterMixin, {
       ajax(url) {
         urlForUpdateRecord = url;
       },
     });
 
-    this.owner.register('adapter:application', Adapter);
+    this.owner.register('adapter:user', UserAdapter);
 
     let store = this.owner.lookup('service:store');
     let existingUser = createExistingRecord(store, 'user');
