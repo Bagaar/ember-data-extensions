@@ -9,7 +9,7 @@ export default Mixin.create({
 
   saveRelationship(relationshipName) {
     assert(
-      'ember-data-bagaaravel: Can not save a relationship of a newly created record.',
+      'ember-data-bagaaravel: Cannot save a relationship of a newly created record.',
       !this.isNew,
     );
 
@@ -32,7 +32,7 @@ export default Mixin.create({
 
   saveRelationships(...relationshipNames) {
     assert(
-      'ember-data-bagaaravel: Can not save relationships of a newly created record.',
+      'ember-data-bagaaravel: Cannot save relationships of a newly created record.',
       !this.isNew,
     );
 
