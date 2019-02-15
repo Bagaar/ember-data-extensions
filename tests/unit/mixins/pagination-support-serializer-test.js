@@ -27,7 +27,9 @@ module('Unit | Mixin | pagination-support-serializer', function (hooks) {
       },
     });
 
-    let Serializer = JSONAPIBagaaravelSerializer.extend(PaginationSupportSerializerMixin);
+    let Serializer = JSONAPIBagaaravelSerializer.extend(
+      PaginationSupportSerializerMixin,
+    );
 
     this.owner.register('adapter:application', Adapter);
     this.owner.register('serializer:application', Serializer);
