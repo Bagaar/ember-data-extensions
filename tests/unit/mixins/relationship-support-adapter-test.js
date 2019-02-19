@@ -21,11 +21,7 @@ module('Unit | Mixin | relationship-support-adapter', function (hooks) {
     let store = this.owner.lookup('service:store');
     let existingUser = createExistingRecord(store, 'user');
 
-    await existingUser.save({
-      adapterOptions: {
-        relationshipName: 'projects',
-      },
-    });
+    await existingUser.saveRelationship('projects');
 
     assert.equal(urlForUpdateRecord, '/users/1/relationships/projects');
   });
