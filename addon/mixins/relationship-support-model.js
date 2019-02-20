@@ -1,3 +1,5 @@
+/* eslint-disable ember/no-new-mixins */
+
 import { RELATIONSHIP_ADAPTER_OPTION } from '@bagaar/ember-data-bagaaravel/config';
 import getRelationshipDescriptor from '@bagaar/ember-data-bagaaravel/utils/get-relationship-descriptor';
 import { assert } from '@ember/debug';

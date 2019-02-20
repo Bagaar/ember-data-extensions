@@ -1,3 +1,5 @@
+/* eslint-disable ember/no-new-mixins */
+
 import getRelationshipName from '@bagaar/ember-data-bagaaravel/utils/get-relationship-name';
 import Mixin from '@ember/object/mixin';
 
