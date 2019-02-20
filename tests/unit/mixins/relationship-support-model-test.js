@@ -1,4 +1,4 @@
-import JSONAPIBagaaravelSerializer from '@bagaar/ember-data-bagaaravel/serializers/json-api-bagaaravel';
+import JSONAPISerializer from 'ember-data/serializers/json-api';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import createExistingRecord from '../../helpers/create-existing-record';
@@ -33,7 +33,7 @@ module('Unit | Mixin | relationship-support-model', function (hooks) {
   });
 
   test('"saveRelationship" throws when the relationship can not be serialized', function (assert) {
-    let UserSerializer = JSONAPIBagaaravelSerializer.extend({
+    let UserSerializer = JSONAPISerializer.extend({
       attrs: {
         company: {
           serialize: false,
