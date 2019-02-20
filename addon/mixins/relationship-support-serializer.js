@@ -1,5 +1,5 @@
-import getAdapterOption from '@bagaar/ember-data-bagaaravel/utils/get-adapter-option';
 import getRelationshipDescriptor from '@bagaar/ember-data-bagaaravel/utils/get-relationship-descriptor';
+import getRelationshipName from '@bagaar/ember-data-bagaaravel/utils/get-relationship-name';
 import Mixin from '@ember/object/mixin';
 
 export default Mixin.create({
@@ -9,9 +9,10 @@ export default Mixin.create({
 
   serialize(snapshot) {
     let serialized = this._super(...arguments);
-    let relationshipName = getAdapterOption(snapshot, 'relationshipName');
+    let relationshipName = getRelationshipName(snapshot.adapterOptions);
+    let isSavingRelationship = !!relationshipName;
 
-    if (!relationshipName) {
+    if (!isSavingRelationship) {
       return serialized;
     }
 
@@ -31,7 +32,7 @@ export default Mixin.create({
   },
 
   shouldSerializeHasMany(snapshot, key, relationshipDescriptor) {
-    let relationshipName = getAdapterOption(snapshot, 'relationshipName');
+    let relationshipName = getRelationshipName(snapshot.adapterOptions);
     let shouldSaveRelationship = relationshipName === relationshipDescriptor.key;
     let shouldSerializeHasMany = this._super(...arguments);
 

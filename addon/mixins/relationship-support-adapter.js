@@ -1,4 +1,4 @@
-import getAdapterOption from '@bagaar/ember-data-bagaaravel/utils/get-adapter-option';
+import getRelationshipName from '@bagaar/ember-data-bagaaravel/utils/get-relationship-name';
 import Mixin from '@ember/object/mixin';
 
 export default Mixin.create({
@@ -10,9 +10,10 @@ export default Mixin.create({
   // BelongsTo relationships are allowed to be updated via the record AND via a separate url.
   urlForUpdateRecord(id, modelName, snapshot) {
     let urlForUpdateRecord = this._super(...arguments);
-    let relationshipName = getAdapterOption(snapshot, 'relationshipName');
+    let relationshipName = getRelationshipName(snapshot.adapterOptions);
+    let isSavingRelationship = !!relationshipName;
 
-    if (relationshipName) {
+    if (isSavingRelationship) {
       return `${urlForUpdateRecord}/relationships/${relationshipName}`;
     }
 
