@@ -1,10 +1,10 @@
-import SerializerMixin from '@bagaar/ember-data-bagaaravel/mixins/serializer';
+import SerializerMixin from '@bagaar/ember-data-bagaaravel/mixins/json-api-serializer';
 import JSONAPISerializer from 'ember-data/serializers/json-api';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import createExistingRecord from '../../helpers/create-existing-record';
 
-module('Unit | Mixin | serializer', function (hooks) {
+module('Unit | Mixin | json-api-serializer', function (hooks) {
   setupTest(hooks);
 
   test('it underscores attributes', function (assert) {

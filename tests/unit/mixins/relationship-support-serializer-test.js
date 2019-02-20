@@ -1,5 +1,5 @@
+import SerializerMixin from '@bagaar/ember-data-bagaaravel/mixins/json-api-serializer';
 import RelationshipSupportSerializerMixin from '@bagaar/ember-data-bagaaravel/mixins/relationship-support-serializer';
-import SerializerMixin from '@bagaar/ember-data-bagaaravel/mixins/serializer';
 import JSONAPIAdapter from 'ember-data/adapters/json-api';
 import JSONAPISerializer from 'ember-data/serializers/json-api';
 import { setupTest } from 'ember-qunit';
