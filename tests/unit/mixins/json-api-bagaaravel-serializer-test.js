@@ -1,14 +1,16 @@
-import JSONAPISerializerMixin from '@bagaar/ember-data-bagaaravel/mixins/json-api-serializer';
+import JSONAPIBagaaravelSerializerMixin from '@bagaar/ember-data-bagaaravel/mixins/json-api-bagaaravel-serializer';
 import JSONAPISerializer from 'ember-data/serializers/json-api';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import createExistingRecord from '../../helpers/create-existing-record';
 
-module('Unit | Mixin | json-api-serializer', function (hooks) {
+module('Unit | Mixin | json-api-bagaaravel-serializer', function (hooks) {
   setupTest(hooks);
 
   test('it underscores attributes', function (assert) {
-    let UserSerializer = JSONAPISerializer.extend(JSONAPISerializerMixin);
+    let UserSerializer = JSONAPISerializer.extend(
+      JSONAPIBagaaravelSerializerMixin
+    );
 
     this.owner.register('serializer:user', UserSerializer);
 
@@ -20,7 +22,9 @@ module('Unit | Mixin | json-api-serializer', function (hooks) {
   });
 
   test('it classifies the model name', function (assert) {
-    let UserSerializer = JSONAPISerializer.extend(JSONAPISerializerMixin);
+    let UserSerializer = JSONAPISerializer.extend(
+      JSONAPIBagaaravelSerializerMixin
+    );
 
     this.owner.register('serializer:user', UserSerializer);
 
@@ -32,7 +36,9 @@ module('Unit | Mixin | json-api-serializer', function (hooks) {
   });
 
   test('it serializes hasMany relationships for new records', function (assert) {
-    let UserSerializer = JSONAPISerializer.extend(JSONAPISerializerMixin);
+    let UserSerializer = JSONAPISerializer.extend(
+      JSONAPIBagaaravelSerializerMixin
+    );
 
     this.owner.register('serializer:user', UserSerializer);
 
@@ -48,7 +54,9 @@ module('Unit | Mixin | json-api-serializer', function (hooks) {
   });
 
   test('it does not serialize hasMany relationships for existing records', function (assert) {
-    let UserSerializer = JSONAPISerializer.extend(JSONAPISerializerMixin);
+    let UserSerializer = JSONAPISerializer.extend(
+      JSONAPIBagaaravelSerializerMixin
+    );
 
     this.owner.register('serializer:user', UserSerializer);
 
