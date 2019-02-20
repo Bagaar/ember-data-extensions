@@ -1,4 +1,4 @@
-import SerializerMixin from '@bagaar/ember-data-bagaaravel/mixins/json-api-serializer';
+import JSONAPISerializerMixin from '@bagaar/ember-data-bagaaravel/mixins/json-api-serializer';
 import JSONAPISerializer from 'ember-data/serializers/json-api';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
@@ -8,7 +8,7 @@ module('Unit | Mixin | json-api-serializer', function (hooks) {
   setupTest(hooks);
 
   test('it underscores attributes', function (assert) {
-    let UserSerializer = JSONAPISerializer.extend(SerializerMixin);
+    let UserSerializer = JSONAPISerializer.extend(JSONAPISerializerMixin);
 
     this.owner.register('serializer:user', UserSerializer);
 
@@ -20,7 +20,7 @@ module('Unit | Mixin | json-api-serializer', function (hooks) {
   });
 
   test('it classifies the model name', function (assert) {
-    let UserSerializer = JSONAPISerializer.extend(SerializerMixin);
+    let UserSerializer = JSONAPISerializer.extend(JSONAPISerializerMixin);
 
     this.owner.register('serializer:user', UserSerializer);
 
@@ -32,7 +32,7 @@ module('Unit | Mixin | json-api-serializer', function (hooks) {
   });
 
   test('it serializes hasMany relationships for new records', function (assert) {
-    let UserSerializer = JSONAPISerializer.extend(SerializerMixin);
+    let UserSerializer = JSONAPISerializer.extend(JSONAPISerializerMixin);
 
     this.owner.register('serializer:user', UserSerializer);
 
@@ -48,7 +48,7 @@ module('Unit | Mixin | json-api-serializer', function (hooks) {
   });
 
   test('it does not serialize hasMany relationships for existing records', function (assert) {
-    let UserSerializer = JSONAPISerializer.extend(SerializerMixin);
+    let UserSerializer = JSONAPISerializer.extend(JSONAPISerializerMixin);
 
     this.owner.register('serializer:user', UserSerializer);
 
