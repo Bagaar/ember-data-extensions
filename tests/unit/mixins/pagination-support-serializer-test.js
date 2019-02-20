@@ -1,6 +1,6 @@
 import PaginationSupportSerializerMixin from '@bagaar/ember-data-bagaaravel/mixins/pagination-support-serializer';
-import JSONAPIBagaaravelSerializer from '@bagaar/ember-data-bagaaravel/serializers/json-api-bagaaravel';
 import JSONAPIAdapter from 'ember-data/adapters/json-api';
+import JSONAPISerializer from 'ember-data/serializers/json-api';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
@@ -27,7 +27,7 @@ module('Unit | Mixin | pagination-support-serializer', function (hooks) {
       },
     });
 
-    let UserSerializer = JSONAPIBagaaravelSerializer.extend(
+    let UserSerializer = JSONAPISerializer.extend(
       PaginationSupportSerializerMixin,
     );
 

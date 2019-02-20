@@ -1,19 +1,19 @@
+import Mixin from '@ember/object/mixin';
 import { classify, underscore } from '@ember/string';
-import JSONAPISerializer from 'ember-data/serializers/json-api';
 
-export default JSONAPISerializer.extend({
+export default Mixin.create({
   /**
    * Hooks
    */
 
   // Bagaaravel uses snake_case for attributes instead of kebab-case.
-  // 'attributeName' -> 'attribute_name'
+  // "attributeName" -> "attribute_name"
   keyForAttribute(key) {
     return underscore(key);
   },
 
-  // Bagaaravel uses the singular classified form of a model's name for `type`.
-  // 'model-name' -> 'ModelName'
+  // Bagaaravel uses the singular classified form of a model's name for "type".
+  // "model-name" -> "ModelName"
   payloadKeyFromModelName(modelName) {
     return classify(modelName);
   },

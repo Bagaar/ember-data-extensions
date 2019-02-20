@@ -1,6 +1,7 @@
+import JSONAPIBagaaravelSerializerMixin from '@bagaar/ember-data-bagaaravel/mixins/json-api-bagaaravel-serializer';
 import RelationshipSupportSerializerMixin from '@bagaar/ember-data-bagaaravel/mixins/relationship-support-serializer';
-import JSONAPIBagaaravelSerializer from '@bagaar/ember-data-bagaaravel/serializers/json-api-bagaaravel';
 import JSONAPIAdapter from 'ember-data/adapters/json-api';
+import JSONAPISerializer from 'ember-data/serializers/json-api';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import createExistingRecord from '../../helpers/create-existing-record';
@@ -17,7 +18,8 @@ module('Unit | Mixin | relationship-support-serializer', function (hooks) {
       },
     });
 
-    let UserSerializer = JSONAPIBagaaravelSerializer.extend(
+    let UserSerializer = JSONAPISerializer.extend(
+      JSONAPIBagaaravelSerializerMixin,
       RelationshipSupportSerializerMixin,
     );
 
@@ -51,7 +53,8 @@ module('Unit | Mixin | relationship-support-serializer', function (hooks) {
       },
     });
 
-    let UserSerializer = JSONAPIBagaaravelSerializer.extend(
+    let UserSerializer = JSONAPISerializer.extend(
+      JSONAPIBagaaravelSerializerMixin,
       RelationshipSupportSerializerMixin,
     );
 
@@ -90,7 +93,8 @@ module('Unit | Mixin | relationship-support-serializer', function (hooks) {
       },
     });
 
-    let UserSerializer = JSONAPIBagaaravelSerializer.extend(
+    let UserSerializer = JSONAPISerializer.extend(
+      JSONAPIBagaaravelSerializerMixin,
       RelationshipSupportSerializerMixin,
     );
 
