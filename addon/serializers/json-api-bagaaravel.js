@@ -18,7 +18,7 @@ export default JSONAPISerializer.extend({
     return classify(modelName);
   },
 
-  // Bagaaravel only allows hasMany relationships to be saved via the resource when it's new.
+  // Bagaaravel only allows hasMany relationships to be saved via the record when it's new.
   shouldSerializeHasMany(snapshot) {
     let isRecordNew = snapshot.record.isNew;
     let shouldSerializeHasMany = this._super(...arguments);

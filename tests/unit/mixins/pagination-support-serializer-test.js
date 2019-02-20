@@ -8,7 +8,7 @@ module('Unit | Mixin | pagination-support-serializer', function (hooks) {
   setupTest(hooks);
 
   test('it creates pagination meta', async function (assert) {
-    let Adapter = JSONAPIAdapter.extend({
+    let UserAdapter = JSONAPIAdapter.extend({
       ajax() {
         return Promise.resolve({
           data: [],
@@ -27,10 +27,12 @@ module('Unit | Mixin | pagination-support-serializer', function (hooks) {
       },
     });
 
-    let Serializer = JSONAPIBagaaravelSerializer.extend(PaginationSupportSerializerMixin);
+    let UserSerializer = JSONAPIBagaaravelSerializer.extend(
+      PaginationSupportSerializerMixin,
+    );
 
-    this.owner.register('adapter:application', Adapter);
-    this.owner.register('serializer:application', Serializer);
+    this.owner.register('adapter:user', UserAdapter);
+    this.owner.register('serializer:user', UserSerializer);
 
     let store = this.owner.lookup('service:store');
     let users = await store.query('user', {});

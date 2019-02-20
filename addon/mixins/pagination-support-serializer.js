@@ -1,6 +1,6 @@
 import Mixin from '@ember/object/mixin';
 
-const NO_PAGE = null;
+const NO_PAGE_NUMBER = null;
 
 export default Mixin.create({
   /**
@@ -36,14 +36,14 @@ function createPaginationMeta(links, meta) {
 
 function extractPageNumberFromLink(link) {
   if (!link) {
-    return NO_PAGE;
+    return NO_PAGE_NUMBER;
   }
 
   let url = new URL(link);
   let page = url.searchParams.get('page');
 
   if (!page) {
-    return NO_PAGE;
+    return NO_PAGE_NUMBER;
   }
 
   return Number(page);

@@ -1,47 +1,56 @@
-import { module, test } from 'qunit';
+import JSONAPIBagaaravelSerializer from '@bagaar/ember-data-bagaaravel/serializers/json-api-bagaaravel';
 import { setupTest } from 'ember-qunit';
+import { module, test } from 'qunit';
+import createExistingRecord from '../../helpers/create-existing-record';
 
 module('Unit | Serializer | json api bagaaravel', function (hooks) {
   setupTest(hooks);
 
-  test('keyForAttribute', function (assert) {
+  test('it underscores attributes', function (assert) {
+    this.owner.register('serializer:user', JSONAPIBagaaravelSerializer);
+
     let store = this.owner.lookup('service:store');
-    let user = store.createRecord('user', { firstName: 'First Name' });
-    let serialized = user.serialize();
+    let newUser = store.createRecord('user', { firstName: 'First Name' });
+    let serialized = newUser.serialize();
 
     assert.equal(serialized.data.attributes.first_name, 'First Name');
   });
 
-  test('payloadKeyFromModelName', function (assert) {
+  test('it classifies the model name', function (assert) {
+    this.owner.register('serializer:user', JSONAPIBagaaravelSerializer);
+
     let store = this.owner.lookup('service:store');
-    let user = store.createRecord('user');
-    let serialized = user.serialize();
+    let newUser = store.createRecord('user');
+    let serialized = newUser.serialize();
 
     assert.equal(serialized.data.type, 'User');
   });
 
-  test('shouldSerializeHasMany', function (assert) {
+  test('it serializes hasMany relationships for new records', function (assert) {
+    this.owner.register('serializer:user', JSONAPIBagaaravelSerializer);
+
     let store = this.owner.lookup('service:store');
-    let project = store.createRecord('project');
-
-    // New user record.
     let newUser = store.createRecord('user');
+    let newProject = store.createRecord('project');
 
-    newUser.projects.addObject(project);
+    newUser.projects.addObject(newProject);
 
-    let newUserSerialized = newUser.serialize();
+    let serialized = newUser.serialize();
 
-    assert.ok(newUserSerialized.data.relationships.projects);
+    assert.ok(serialized.data.relationships.projects);
+  });
 
-    // Existing user record.
-    let existingUser = store.createRecord('user', { id: 1 });
+  test('it does not serialize hasMany relationships for existing records', function (assert) {
+    this.owner.register('serializer:user', JSONAPIBagaaravelSerializer);
 
-    existingUser.projects.addObject(project);
+    let store = this.owner.lookup('service:store');
+    let existingUser = createExistingRecord(store, 'user');
+    let newProject = store.createRecord('project');
 
-    store.pushPayload(existingUser.serialize({ includeId: true }));
+    existingUser.projects.addObject(newProject);
 
-    let existingUserSerialized = existingUser.serialize();
+    let serialized = existingUser.serialize();
 
-    assert.notOk(existingUserSerialized.data.relationships);
+    assert.notOk(serialized.data.relationships);
   });
 });
