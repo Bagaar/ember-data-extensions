@@ -1,7 +1,7 @@
 /* eslint-disable ember/no-new-mixins */
 
-import { RELATIONSHIP_ADAPTER_OPTION } from '@bagaar/ember-data-bagaaravel/config';
-import getRelationshipDescriptor from '@bagaar/ember-data-bagaaravel/utils/get-relationship-descriptor';
+import { RELATIONSHIP_ADAPTER_OPTION } from '@bagaaravel/ember-data-extensions/config';
+import getRelationshipDescriptor from '@bagaaravel/ember-data-extensions/utils/get-relationship-descriptor';
 import { assert } from '@ember/debug';
 import Mixin from '@ember/object/mixin';
 
@@ -12,17 +12,17 @@ export default Mixin.create({
 
   saveRelationship(relationshipName) {
     assert(
-      'ember-data-bagaaravel: Cannot save a relationship of a newly created record.',
+      '@bagaaravel/ember-data-extensions: Cannot save a relationship of a newly created record.',
       !this.isNew,
     );
 
     assert(
-      `ember-data-bagaaravel: "${relationshipName}" is not a valid relationship name.`,
+      `@bagaaravel/ember-data-extensions: "${relationshipName}" is not a valid relationship name.`,
       getRelationshipDescriptor(this, relationshipName),
     );
 
     assert(
-      `ember-data-bagaaravel: "${relationshipName}" relationship can not be serialized.`,
+      `@bagaaravel/ember-data-extensions: "${relationshipName}" relationship can not be serialized.`,
       this.canSerializeRelationship(relationshipName),
     );
 
@@ -35,7 +35,7 @@ export default Mixin.create({
 
   saveRelationships(...relationshipNames) {
     assert(
-      'ember-data-bagaaravel: Cannot save relationships of a newly created record.',
+      '@bagaaravel/ember-data-extensions: Cannot save relationships of a newly created record.',
       !this.isNew,
     );
 

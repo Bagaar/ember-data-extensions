@@ -1,4 +1,4 @@
-import getRelationshipDescriptor from '@bagaar/ember-data-bagaaravel/utils/get-relationship-descriptor';
+import getRelationshipDescriptor from '@bagaaravel/ember-data-extensions/utils/get-relationship-descriptor';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
