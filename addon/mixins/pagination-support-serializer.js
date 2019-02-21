@@ -31,7 +31,7 @@ function createPaginationMeta(links, meta) {
     lastPage: extractPageNumberFromLink(links.last),
     nextPage: extractPageNumberFromLink(links.next),
     previousPage: extractPageNumberFromLink(links.previous),
-    itemsPerPage: meta.perPage,
+    itemsPerPage: meta.per_page,
     totalItems: meta.total,
   };
 }

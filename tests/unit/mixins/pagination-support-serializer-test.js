@@ -22,7 +22,7 @@ module('Unit | Mixin | pagination-support-serializer', function (hooks) {
             self: 'https://api.com/users?page=1&per_page=15',
           },
           meta: {
-            perPage: 15,
+            per_page: 15,
             total: 125,
           },
         });
