@@ -1,3 +1,5 @@
+/* eslint-disable ember/no-new-mixins */
+
 import RelationshipSupportAdapterMixin from '@bagaar/ember-data-bagaaravel/mixins/relationship-support-adapter';
 import JSONAPIAdapter from 'ember-data/adapters/json-api';
 import { setupTest } from 'ember-qunit';

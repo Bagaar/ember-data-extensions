@@ -1,3 +1,5 @@
+/* eslint-disable ember/no-new-mixins */
+
 import PaginationSupportSerializerMixin from '@bagaar/ember-data-bagaaravel/mixins/pagination-support-serializer';
 import JSONAPIAdapter from 'ember-data/adapters/json-api';
 import JSONAPISerializer from 'ember-data/serializers/json-api';

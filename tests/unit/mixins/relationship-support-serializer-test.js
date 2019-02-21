@@ -1,3 +1,5 @@
+/* eslint-disable ember/no-new-mixins */
+
 import JSONAPIBagaaravelSerializerMixin from '@bagaar/ember-data-bagaaravel/mixins/json-api-bagaaravel-serializer';
 import RelationshipSupportSerializerMixin from '@bagaar/ember-data-bagaaravel/mixins/relationship-support-serializer';
 import JSONAPIAdapter from 'ember-data/adapters/json-api';

@@ -1,3 +1,5 @@
+/* eslint-disable ember/no-new-mixins */
+
 import JSONAPISerializer from 'ember-data/serializers/json-api';
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
