@@ -1,7 +1,7 @@
 {
-  "name": "@bagaar/ember-data-bagaaravel",
+  "name": "@bagaaravel/ember-data-extensions",
   "version": "0.1.0",
-  "description": "Ember Data extension to communicate with the Bagaaravel JSON API implementation.",
+  "description": "Ember Data extensions to communicate with the Bagaaravel JSON API implementation.",
   "keywords": [
     "bagaar",
     "bagaaravel",
@@ -10,7 +10,7 @@
     "ember-addon",
     "ember-data"
   ],
-  "repository": "https://github.com/Bagaar/ember-permissions",
+  "repository": "https://github.com/Bagaar/ember-data-extensions",
   "license": "MIT",
   "author": "Bagaar",
   "directories": {

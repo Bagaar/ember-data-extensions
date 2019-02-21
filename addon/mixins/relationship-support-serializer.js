@@ -1,7 +1,7 @@
 /* eslint-disable ember/no-new-mixins */
 
-import getRelationshipDescriptor from '@bagaar/ember-data-bagaaravel/utils/get-relationship-descriptor';
-import getRelationshipName from '@bagaar/ember-data-bagaaravel/utils/get-relationship-name';
+import getRelationshipDescriptor from '@bagaaravel/ember-data-extensions/utils/get-relationship-descriptor';
+import getRelationshipName from '@bagaaravel/ember-data-extensions/utils/get-relationship-name';
 import Mixin from '@ember/object/mixin';
 
 export default Mixin.create({

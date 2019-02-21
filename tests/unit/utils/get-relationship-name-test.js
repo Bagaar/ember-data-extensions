@@ -1,5 +1,5 @@
-import { RELATIONSHIP_ADAPTER_OPTION } from '@bagaar/ember-data-bagaaravel/config';
-import getRelationshipName from '@bagaar/ember-data-bagaaravel/utils/get-relationship-name';
+import { RELATIONSHIP_ADAPTER_OPTION } from '@bagaaravel/ember-data-extensions/config';
+import getRelationshipName from '@bagaaravel/ember-data-extensions/utils/get-relationship-name';
 import { module, test } from 'qunit';
 
 module('Unit | Utility | get-relationship-name', function () {
