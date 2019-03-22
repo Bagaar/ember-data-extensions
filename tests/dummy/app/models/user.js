@@ -1,7 +1,7 @@
-import RelationshipSupportModelMixin from '@bagaaravel/ember-data-extensions/mixins/relationship-support-model';
-import attr from 'ember-data/attr';
-import Model from 'ember-data/model';
-import { belongsTo, hasMany } from 'ember-data/relationships';
+import RelationshipSupportModelMixin from '@bagaaravel/ember-data-extensions/mixins/relationship-support-model'
+import attr from 'ember-data/attr'
+import Model from 'ember-data/model'
+import { belongsTo, hasMany } from 'ember-data/relationships'
 
 export default Model.extend(RelationshipSupportModelMixin, {
   /**
@@ -15,5 +15,5 @@ export default Model.extend(RelationshipSupportModelMixin, {
    */
 
   company: belongsTo('company'),
-  projects: hasMany('project'),
-});
+  projects: hasMany('project')
+})

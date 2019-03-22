@@ -1,128 +1,130 @@
 /* eslint-disable ember/no-new-mixins */
 
-import JSONAPIBagaaravelSerializerMixin from '@bagaaravel/ember-data-extensions/mixins/json-api-bagaaravel-serializer';
-import RelationshipSupportSerializerMixin from '@bagaaravel/ember-data-extensions/mixins/relationship-support-serializer';
-import JSONAPIAdapter from 'ember-data/adapters/json-api';
-import JSONAPISerializer from 'ember-data/serializers/json-api';
-import { setupTest } from 'ember-qunit';
-import { module, test } from 'qunit';
-import createExistingRecord from '../../helpers/create-existing-record';
+import JSONAPIBagaaravelSerializerMixin from '@bagaaravel/ember-data-extensions/mixins/json-api-bagaaravel-serializer'
+import RelationshipSupportSerializerMixin from '@bagaaravel/ember-data-extensions/mixins/relationship-support-serializer'
+import JSONAPIAdapter from 'ember-data/adapters/json-api'
+import JSONAPISerializer from 'ember-data/serializers/json-api'
+import { setupTest } from 'ember-qunit'
+import { module, test } from 'qunit'
+import createExistingRecord from '../../helpers/create-existing-record'
 
 module('Unit | Mixin | relationship-support-serializer', function (hooks) {
-  setupTest(hooks);
+  setupTest(hooks)
 
   test('saving a record', async function (assert) {
-    let serialized;
+    let serialized
 
     let UserAdapter = JSONAPIAdapter.extend({
-      ajax(url, type, options) {
-        serialized = options.data;
-      },
-    });
+      ajax (url, type, options) {
+        serialized = options.data
+      }
+    })
 
     let UserSerializer = JSONAPISerializer.extend(
       JSONAPIBagaaravelSerializerMixin,
-      RelationshipSupportSerializerMixin,
-    );
+      RelationshipSupportSerializerMixin
+    )
 
-    this.owner.register('adapter:user', UserAdapter);
-    this.owner.register('serializer:user', UserSerializer);
+    this.owner.register('adapter:user', UserAdapter)
+    this.owner.register('serializer:user', UserSerializer)
 
-    let store = this.owner.lookup('service:store');
+    let store = this.owner.lookup('service:store')
     let existingUser = createExistingRecord(store, 'user', {
-      firstName: 'First Name',
-    });
+      firstName: 'First Name'
+    })
 
-    await existingUser.save();
+    await existingUser.save()
 
     assert.deepEqual(serialized, {
       data: {
         attributes: {
-          first_name: 'First Name',
+          first_name: 'First Name'
         },
         id: '1',
-        type: 'User',
-      },
-    });
-  });
+        type: 'User'
+      }
+    })
+  })
 
   test('saving a belongsTo relationship', async function (assert) {
-    let serialized;
+    let serialized
 
     let UserAdapter = JSONAPIAdapter.extend({
-      ajax(url, type, options) {
-        serialized = options.data;
-      },
-    });
+      ajax (url, type, options) {
+        serialized = options.data
+      }
+    })
 
     let UserSerializer = JSONAPISerializer.extend(
       JSONAPIBagaaravelSerializerMixin,
-      RelationshipSupportSerializerMixin,
-    );
+      RelationshipSupportSerializerMixin
+    )
 
-    this.owner.register('adapter:user', UserAdapter);
-    this.owner.register('serializer:user', UserSerializer);
+    this.owner.register('adapter:user', UserAdapter)
+    this.owner.register('serializer:user', UserSerializer)
 
-    let store = this.owner.lookup('service:store');
-    let existingUser = createExistingRecord(store, 'user');
+    let store = this.owner.lookup('service:store')
+    let existingUser = createExistingRecord(store, 'user')
 
-    await existingUser.saveRelationship('company');
+    await existingUser.saveRelationship('company')
 
     assert.deepEqual(serialized, {
-      data: null,
-    });
+      data: null
+    })
 
-    let existingCompany = createExistingRecord(store, 'company');
+    let existingCompany = createExistingRecord(store, 'company')
 
-    existingUser.set('company', existingCompany);
+    existingUser.set('company', existingCompany)
 
-    await existingUser.saveRelationship('company');
+    await existingUser.saveRelationship('company')
 
     assert.deepEqual(serialized, {
       data: {
         id: '1',
-        type: 'Company',
-      },
-    });
-  });
+        type: 'Company'
+      }
+    })
+  })
 
   test('saving an hasMany relationship', async function (assert) {
-    let serialized;
+    let serialized
 
     let UserAdapter = JSONAPIAdapter.extend({
-      ajax(url, type, options) {
-        serialized = options.data;
-      },
-    });
+      ajax (url, type, options) {
+        serialized = options.data
+      }
+    })
 
     let UserSerializer = JSONAPISerializer.extend(
       JSONAPIBagaaravelSerializerMixin,
-      RelationshipSupportSerializerMixin,
-    );
+      RelationshipSupportSerializerMixin
+    )
 
-    this.owner.register('adapter:user', UserAdapter);
-    this.owner.register('serializer:user', UserSerializer);
+    this.owner.register('adapter:user', UserAdapter)
+    this.owner.register('serializer:user', UserSerializer)
 
-    let store = this.owner.lookup('service:store');
-    let existingUser = createExistingRecord(store, 'user');
+    let store = this.owner.lookup('service:store')
+    let existingUser = createExistingRecord(store, 'user')
 
-    await existingUser.saveRelationship('projects');
-
-    assert.deepEqual(serialized, {
-      data: [],
-    });
-
-    let existingProject = createExistingRecord(store, 'project');
-
-    existingUser.projects.addObject(existingProject);
-
-    await existingUser.saveRelationship('projects');
+    await existingUser.saveRelationship('projects')
 
     assert.deepEqual(serialized, {
-      data: [{
-        id: '1',
-        type: 'Project',
-      }],
-    });
-  });
-});
+      data: []
+    })
+
+    let existingProject = createExistingRecord(store, 'project')
+
+    existingUser.projects.addObject(existingProject)
+
+    await existingUser.saveRelationship('projects')
+
+    assert.deepEqual(serialized, {
+      data: [
+        {
+          id: '1',
+          type: 'Project'
+        }
+      ]
+    })
+  })
+})

@@ -1,10 +1,14 @@
-export default function createExistingRecord(store, modelName, inputProperties = {}) {
+export default function createExistingRecord (
+  store,
+  modelName,
+  inputProperties = {}
+) {
   let existingRecord = store.createRecord(modelName, {
     ...inputProperties,
-    id: 1,
-  });
+    id: 1
+  })
 
-  store.pushPayload(existingRecord.serialize({ includeId: true }));
+  store.pushPayload(existingRecord.serialize({ includeId: true }))
 
-  return existingRecord;
+  return existingRecord
 }
