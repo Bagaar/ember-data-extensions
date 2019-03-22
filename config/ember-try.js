@@ -12,7 +12,7 @@ module.exports = function () {
       useYarn: true,
       scenarios: [
         {
-          name: 'ember-lts-3.1',
+          name: 'ember-3.1',
           env: {
             EMBER_OPTIONAL_FEATURES: JSON.stringify({ 'jquery-integration': true }),
           },
