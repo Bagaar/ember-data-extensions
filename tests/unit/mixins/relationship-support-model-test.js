@@ -16,22 +16,18 @@ module('Unit | Mixin | relationship-support-model', function (hooks) {
     let store = this.owner.lookup('service:store');
     let newUser = store.createRecord('user');
 
-    try {
+    assert.throws(() => {
       newUser.saveRelationship('company');
-    } catch (error) {
-      assert.ok(error);
-    }
+    });
   });
 
   test('"saveRelationship" throws when the relationship name is not valid', function (assert) {
     let store = this.owner.lookup('service:store');
     let existingUser = createExistingRecord(store, 'user');
 
-    try {
+    assert.throws(() => {
       existingUser.saveRelationship('invalid-relationship-name');
-    } catch (error) {
-      assert.ok(error);
-    }
+    });
   });
 
   test('"saveRelationship" throws when the relationship can not be serialized', function (assert) {
@@ -48,11 +44,9 @@ module('Unit | Mixin | relationship-support-model', function (hooks) {
     let store = this.owner.lookup('service:store');
     let existingUser = createExistingRecord(store, 'user');
 
-    try {
+    assert.throws(() => {
       existingUser.saveRelationship('company');
-    } catch (error) {
-      assert.ok(error);
-    }
+    });
   });
 
   /**
@@ -63,10 +57,8 @@ module('Unit | Mixin | relationship-support-model', function (hooks) {
     let store = this.owner.lookup('service:store');
     let newUser = store.createRecord('user');
 
-    try {
+    assert.throws(() => {
       newUser.saveRelationships('company', 'projects');
-    } catch (error) {
-      assert.ok(error);
-    }
+    });
   });
 });
