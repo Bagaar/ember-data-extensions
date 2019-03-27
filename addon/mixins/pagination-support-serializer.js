@@ -3,6 +3,7 @@
 import Mixin from '@ember/object/mixin'
 
 const NO_PAGE_NUMBER = null
+const PAGE_PARAM_KEY = 'page'
 
 export default Mixin.create({
   /**
@@ -44,12 +45,46 @@ function extractPageNumberFromLink (link) {
     return NO_PAGE_NUMBER
   }
 
-  let url = new URL(link)
-  let page = url.searchParams.get('page')
+  let query = extractQueryFromLink(link)
+
+  if (!query) {
+    return NO_PAGE_NUMBER
+  }
+
+  let params = splitQueryIntoSeparateParams(query)
+
+  if (params.length === 0) {
+    return NO_PAGE_NUMBER
+  }
+
+  let page
+
+  params.some(param => {
+    let [key, value] = splitParamIntoKeyValue(param)
+    let isPageParam = key === PAGE_PARAM_KEY
+
+    if (isPageParam) {
+      page = value
+    }
+
+    return isPageParam
+  })
 
   if (!page) {
     return NO_PAGE_NUMBER
   }
 
   return Number(page)
+}
+
+function extractQueryFromLink (link) {
+  return link.split('?')[1]
+}
+
+function splitQueryIntoSeparateParams (query) {
+  return query.split('&')
+}
+
+function splitParamIntoKeyValue (param) {
+  return param.split('=')
 }
