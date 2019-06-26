@@ -14,6 +14,11 @@ export default Mixin.create({
     return underscore(key)
   },
 
+  // Bagaaravel uses camelCase for relationship keys so no transformation is needed
+  keyForRelationship (key) {
+    return key
+  },
+
   // Bagaaravel uses the singular classified form of a model's name for "type".
   // "model-name" -> "ModelName"
   payloadKeyFromModelName (modelName) {
