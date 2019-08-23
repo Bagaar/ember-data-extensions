@@ -15,5 +15,6 @@ export default Model.extend(RelationshipSupportModelMixin, {
    */
 
   company: belongsTo('company'),
-  projects: hasMany('project')
+  projects: hasMany('project'),
+  favoriteProjects: hasMany('project')
 })

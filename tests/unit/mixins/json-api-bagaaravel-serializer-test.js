@@ -23,6 +23,24 @@ module('Unit | Mixin | json-api-bagaaravel-serializer', function (hooks) {
     assert.equal(serialized.data.attributes.first_name, 'First Name')
   })
 
+  test('it leaves relationships untouched', function (assert) {
+    let UserSerializer = JSONAPISerializer.extend(
+      JSONAPIBagaaravelSerializerMixin
+    )
+
+    this.owner.register('serializer:user', UserSerializer)
+
+    let store = this.owner.lookup('service:store')
+    let newUser = store.createRecord('user')
+    let newProject = store.createRecord('project')
+
+    newUser.favoriteProjects.addObject(newProject)
+
+    let serialized = newUser.serialize()
+
+    assert.ok(serialized.data.relationships.favoriteProjects)
+  })
+
   test('it classifies the model name', function (assert) {
     let UserSerializer = JSONAPISerializer.extend(
       JSONAPIBagaaravelSerializerMixin
