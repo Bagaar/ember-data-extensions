@@ -1,6 +1,7 @@
 /* eslint-disable ember/no-new-mixins */
 
 import JSONAPIBagaaravelSerializerMixin from '@bagaaravel/ember-data-extensions/mixins/json-api-bagaaravel-serializer'
+import JSONAPIAdapter from 'ember-data/adapters/json-api'
 import JSONAPISerializer from 'ember-data/serializers/json-api'
 import { setupTest } from 'ember-qunit'
 import { module, test } from 'qunit'
@@ -73,7 +74,7 @@ module('Unit | Mixin | json-api-bagaaravel-serializer', function (hooks) {
     assert.ok(serialized.data.relationships.projects)
   })
 
-  test('it does not serialize hasMany relationships for existing records', function (assert) {
+  test('it serializes hasMany relationships for existing records', function (assert) {
     let UserSerializer = JSONAPISerializer.extend(
       JSONAPIBagaaravelSerializerMixin
     )
@@ -88,6 +89,30 @@ module('Unit | Mixin | json-api-bagaaravel-serializer', function (hooks) {
 
     let serialized = existingUser.serialize()
 
-    assert.notOk(serialized.data.relationships)
+    assert.ok(serialized.data.relationships)
+  })
+
+  test('it does not serialize hasMany relationships for existing records when saving', function (assert) {
+    let UserAdapter = JSONAPIAdapter.extend({
+      updateRecord (store, type, snapshot) {
+        let serialized = snapshot.record.serialize()
+
+        assert.notOk(serialized.data.relationships)
+      }
+    })
+
+    let UserSerializer = JSONAPISerializer.extend(
+      JSONAPIBagaaravelSerializerMixin
+    )
+
+    this.owner.register('adapter:user', UserAdapter)
+    this.owner.register('serializer:user', UserSerializer)
+
+    let store = this.owner.lookup('service:store')
+    let existingUser = createExistingRecord(store, 'user')
+    let newProject = store.createRecord('project')
+
+    existingUser.projects.addObject(newProject)
+    existingUser.save()
   })
 })

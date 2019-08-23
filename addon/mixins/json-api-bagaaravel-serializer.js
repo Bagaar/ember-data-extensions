@@ -28,8 +28,9 @@ export default Mixin.create({
   // Bagaaravel only allows hasMany relationships to be saved via the record when it's new.
   shouldSerializeHasMany (snapshot) {
     let isRecordNew = snapshot.record.isNew
+    let isRecordSaving = snapshot.record.isSaving
     let shouldSerializeHasMany = this._super(...arguments)
 
-    return isRecordNew && shouldSerializeHasMany
+    return (isRecordNew || !isRecordSaving) && shouldSerializeHasMany
   }
 })
