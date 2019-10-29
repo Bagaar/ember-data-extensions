@@ -15,6 +15,7 @@ Ember Data extensions to communicate with the Bagaaravel JSON API implementation
 - [Installation](#installation)
 - [Usage](#usage)
 - [Public API](#public-api)
+- [Contributing](#contributing)
 - [License](#license)
 
 ## Introduction
@@ -38,6 +39,10 @@ TODO
 ## Public API
 
 TODO
+
+## Contributing
+
+See the [Contributing](CONTRIBUTING.md) guide for details.
 
 ## License
 
