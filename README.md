@@ -4,7 +4,7 @@
 
 **`@bagaaravel/ember-data-extensions` is built and maintained by [Bagaar](https://bagaar.be).**
 
-[![NPM Version](https://badge.fury.io/js/%40bagaaravel%2Fember-data-extensions.svg)](https://badge.fury.io/js/%40bagaaravel%2Fember-data-extensions) [![Build Status](https://travis-ci.org/Bagaar/ember-data-extensions.svg?branch=master)](https://travis-ci.org/Bagaar/ember-data-extensions) [![Ember Observer Score](https://emberobserver.com/badges/-bagaaravel-ember-data-extensions.svg)](https://emberobserver.com/addons/@bagaaravel/ember-data-extensions) [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+[![NPM Version](https://badge.fury.io/js/%40bagaaravel%2Fember-data-extensions.svg)](https://badge.fury.io/js/%40bagaaravel%2Fember-data-extensions) [![Build Status](https://travis-ci.com/Bagaar/ember-data-extensions.svg?branch=master)](https://travis-ci.com/Bagaar/ember-data-extensions) [![Ember Observer Score](https://emberobserver.com/badges/-bagaaravel-ember-data-extensions.svg)](https://emberobserver.com/addons/@bagaaravel/ember-data-extensions) [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
 Ember Data extensions to communicate with the Bagaaravel JSON API implementation.
 
