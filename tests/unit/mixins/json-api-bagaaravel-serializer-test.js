@@ -92,7 +92,7 @@ module('Unit | Mixin | json-api-bagaaravel-serializer', function (hooks) {
     assert.ok(serialized.data.relationships)
   })
 
-  test('it does not serialize hasMany relationships for existing records when saving', function (assert) {
+  test('it does not serialize hasMany relationships for existing records when saving', async function (assert) {
     let UserAdapter = JSONAPIAdapter.extend({
       updateRecord (store, type, snapshot) {
         let serialized = snapshot.record.serialize()
@@ -113,6 +113,6 @@ module('Unit | Mixin | json-api-bagaaravel-serializer', function (hooks) {
     let newProject = store.createRecord('project')
 
     existingUser.projects.addObject(newProject)
-    existingUser.save()
+    await existingUser.save()
   })
 })
