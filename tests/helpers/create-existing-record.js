@@ -1,3 +1,5 @@
+let id = 1
+
 export default function createExistingRecord (
   store,
   modelName,
@@ -5,8 +7,10 @@ export default function createExistingRecord (
 ) {
   let existingRecord = store.createRecord(modelName, {
     ...inputProperties,
-    id: 1
+    id
   })
+
+  id += 1
 
   store.pushPayload(existingRecord.serialize({ includeId: true }))
 
