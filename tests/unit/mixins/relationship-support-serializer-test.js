@@ -40,7 +40,7 @@ module('Unit | Mixin | relationship-support-serializer', function (hooks) {
         attributes: {
           first_name: 'First Name'
         },
-        id: '1',
+        id: existingUser.id,
         type: 'User'
       }
     })
@@ -80,7 +80,7 @@ module('Unit | Mixin | relationship-support-serializer', function (hooks) {
 
     assert.deepEqual(serialized, {
       data: {
-        id: '1',
+        id: existingCompany.id,
         type: 'Company'
       }
     })
@@ -121,7 +121,7 @@ module('Unit | Mixin | relationship-support-serializer', function (hooks) {
     assert.deepEqual(serialized, {
       data: [
         {
-          id: '1',
+          id: existingProject.id,
           type: 'Project'
         }
       ]

@@ -25,6 +25,9 @@ module('Unit | Mixin | relationship-support-adapter', function (hooks) {
 
     await existingUser.saveRelationship('projects')
 
-    assert.equal(urlForUpdateRecord, '/users/1/relationships/projects')
+    assert.equal(
+      urlForUpdateRecord,
+      `/users/${existingUser.id}/relationships/projects`
+    )
   })
 })
