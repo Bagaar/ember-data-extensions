@@ -1,5 +1,6 @@
 /* eslint-disable ember/no-new-mixins */
 
+import { deprecate } from '@ember/debug'
 import Mixin from '@ember/object/mixin'
 
 const NO_PAGE_NUMBER = null
@@ -9,6 +10,20 @@ export default Mixin.create({
   /**
    * Hooks
    */
+
+  init () {
+    this._super(...arguments)
+
+    deprecate(
+      'Use of the `pagination-support-serializer` mixin has been deprecated.',
+      false,
+      {
+        id:
+          '@bagaaravel/ember-data-extensions.pagination-support-serializer-mixin',
+        until: '1.0.0'
+      }
+    )
+  },
 
   normalizeQueryResponse () {
     let normalized = this._super(...arguments)
