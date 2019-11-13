@@ -1,59 +1,38 @@
 /* eslint-disable ember/no-new-mixins */
 
-import { RELATIONSHIP_ADAPTER_OPTION } from '@bagaaravel/ember-data-extensions/config'
-import getRelationshipDescriptor from '@bagaaravel/ember-data-extensions/utils/get-relationship-descriptor'
-import { assert } from '@ember/debug'
+import saveRelationship from '@bagaaravel/ember-data-extensions/utils/save-relationship'
+import saveRelationships from '@bagaaravel/ember-data-extensions/utils/save-relationships'
+import { deprecate } from '@ember/debug'
 import Mixin from '@ember/object/mixin'
 
 export default Mixin.create({
+  /**
+   * Hooks
+   */
+
+  init () {
+    this._super(...arguments)
+
+    deprecate(
+      'Use of the `relationship-support-model` mixin has been deprecated. Use the `save-relationship` and `save-relationships` utilities instead.',
+      false,
+      {
+        id:
+          '@bagaaravel/ember-data-extensions.relationship-support-model-mixin',
+        until: '1.0.0'
+      }
+    )
+  },
+
   /**
    * Methods
    */
 
   saveRelationship (relationshipName) {
-    assert(
-      '@bagaaravel/ember-data-extensions: Cannot save a relationship of a newly created record.',
-      !this.isNew
-    )
-
-    assert(
-      `@bagaaravel/ember-data-extensions: "${relationshipName}" is not a valid relationship name.`,
-      getRelationshipDescriptor(this, relationshipName)
-    )
-
-    assert(
-      `@bagaaravel/ember-data-extensions: "${relationshipName}" relationship can not be serialized.`,
-      this.canSerializeRelationship(relationshipName)
-    )
-
-    return this.save({
-      adapterOptions: {
-        [RELATIONSHIP_ADAPTER_OPTION]: relationshipName
-      }
-    })
+    return saveRelationship(this, relationshipName)
   },
 
   saveRelationships (...relationshipNames) {
-    assert(
-      '@bagaaravel/ember-data-extensions: Cannot save relationships of a newly created record.',
-      !this.isNew
-    )
-
-    let promises = relationshipNames.map(relationshipName =>
-      this.saveRelationship(relationshipName)
-    )
-
-    return Promise.all(promises).then(() => this)
-  },
-
-  canSerializeRelationship (relationshipName) {
-    let serializer = this.store.serializerFor(this.constructor.modelName)
-    let { attrs } = serializer
-
-    return (
-      !attrs ||
-      !attrs[relationshipName] ||
-      attrs[relationshipName].serialize !== false
-    )
+    return saveRelationships(this, ...relationshipNames)
   }
 })
