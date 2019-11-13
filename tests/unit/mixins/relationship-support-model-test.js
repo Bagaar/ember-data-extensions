@@ -8,6 +8,14 @@ import createExistingRecord from '../../helpers/create-existing-record'
 module('Unit | Mixin | relationship-support-model', function (hooks) {
   setupTest(hooks)
 
+  test('it triggers a deprecation warning', function (assert) {
+    let store = this.owner.lookup('service:store')
+
+    assert.expectDeprecation(() => {
+      store.createRecord('user')
+    })
+  })
+
   /**
    * saveRelationship
    */
