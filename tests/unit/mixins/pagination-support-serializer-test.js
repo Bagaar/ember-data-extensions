@@ -49,4 +49,16 @@ module('Unit | Mixin | pagination-support-serializer', function (hooks) {
       totalItems: 125
     })
   })
+
+  test('it triggers a deprecation warning', function (assert) {
+    let UserSerializer = JSONAPISerializer.extend(
+      PaginationSupportSerializerMixin
+    )
+
+    this.owner.register('serializer:user', UserSerializer)
+
+    assert.expectDeprecation(() => {
+      this.owner.lookup('serializer:user')
+    })
+  })
 })
