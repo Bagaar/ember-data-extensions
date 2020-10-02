@@ -34,8 +34,8 @@ module('Unit | Mixin | pagination-support-serializer', function (hooks) {
     this.owner.register('adapter:user', UserAdapter)
     this.owner.register('serializer:user', UserSerializer)
 
-    let store = this.owner.lookup('service:store')
-    let users = await store.query('user', {})
+    const store = this.owner.lookup('service:store')
+    const users = await store.query('user', {})
 
     assert.deepEqual(users.meta.pagination, {
       currentPage: 1,

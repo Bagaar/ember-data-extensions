@@ -4,13 +4,13 @@ import { module, test } from 'qunit'
 
 module('Unit | Utility | get-relationship-name', function () {
   test('it returns the relationship name', function (assert) {
-    let snapshot = {
+    const snapshot = {
       adapterOptions: {
         [RELATIONSHIP_ADAPTER_OPTION]: 'projects'
       }
     }
 
-    let relationshipName = getRelationshipName(snapshot.adapterOptions)
+    const relationshipName = getRelationshipName(snapshot.adapterOptions)
 
     assert.equal(relationshipName, 'projects')
   })

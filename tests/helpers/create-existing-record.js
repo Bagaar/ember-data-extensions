@@ -5,7 +5,7 @@ export default function createExistingRecord (
   modelName,
   inputProperties = {}
 ) {
-  let existingRecord = store.createRecord(modelName, {
+  const existingRecord = store.createRecord(modelName, {
     ...inputProperties,
     id
   })

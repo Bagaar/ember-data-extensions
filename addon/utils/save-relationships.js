@@ -7,7 +7,7 @@ export default function saveRelationships (record, ...relationshipNames) {
     !record.isNew
   )
 
-  let promises = relationshipNames.map(relationshipName =>
+  const promises = relationshipNames.map(relationshipName =>
     saveRelationship(record, relationshipName)
   )
 

@@ -15,9 +15,9 @@ module('Unit | Mixin | json-api-bagaaravel-serializer', function (hooks) {
 
     this.owner.register('serializer:user', UserSerializer)
 
-    let store = this.owner.lookup('service:store')
-    let newUser = store.createRecord('user', { firstName: 'First Name' })
-    let serialized = newUser.serialize()
+    const store = this.owner.lookup('service:store')
+    const newUser = store.createRecord('user', { firstName: 'First Name' })
+    const serialized = newUser.serialize()
 
     assert.equal(serialized.data.attributes.first_name, 'First Name')
   })
@@ -29,13 +29,13 @@ module('Unit | Mixin | json-api-bagaaravel-serializer', function (hooks) {
 
     this.owner.register('serializer:user', UserSerializer)
 
-    let store = this.owner.lookup('service:store')
-    let newUser = store.createRecord('user')
-    let newProject = store.createRecord('project')
+    const store = this.owner.lookup('service:store')
+    const newUser = store.createRecord('user')
+    const newProject = store.createRecord('project')
 
     newUser.favoriteProjects.addObject(newProject)
 
-    let serialized = newUser.serialize()
+    const serialized = newUser.serialize()
 
     assert.ok(serialized.data.relationships.favoriteProjects)
   })
@@ -47,9 +47,9 @@ module('Unit | Mixin | json-api-bagaaravel-serializer', function (hooks) {
 
     this.owner.register('serializer:user', UserSerializer)
 
-    let store = this.owner.lookup('service:store')
-    let newUser = store.createRecord('user')
-    let serialized = newUser.serialize()
+    const store = this.owner.lookup('service:store')
+    const newUser = store.createRecord('user')
+    const serialized = newUser.serialize()
 
     assert.equal(serialized.data.type, 'User')
   })
@@ -61,13 +61,13 @@ module('Unit | Mixin | json-api-bagaaravel-serializer', function (hooks) {
 
     this.owner.register('serializer:user', UserSerializer)
 
-    let store = this.owner.lookup('service:store')
-    let newUser = store.createRecord('user')
-    let newProject = store.createRecord('project')
+    const store = this.owner.lookup('service:store')
+    const newUser = store.createRecord('user')
+    const newProject = store.createRecord('project')
 
     newUser.projects.addObject(newProject)
 
-    let serialized = newUser.serialize()
+    const serialized = newUser.serialize()
 
     assert.ok(serialized.data.relationships.projects)
   })
@@ -79,13 +79,13 @@ module('Unit | Mixin | json-api-bagaaravel-serializer', function (hooks) {
 
     this.owner.register('serializer:user', UserSerializer)
 
-    let store = this.owner.lookup('service:store')
-    let existingUser = createExistingRecord(store, 'user')
-    let newProject = store.createRecord('project')
+    const store = this.owner.lookup('service:store')
+    const existingUser = createExistingRecord(store, 'user')
+    const newProject = store.createRecord('project')
 
     existingUser.projects.addObject(newProject)
 
-    let serialized = existingUser.serialize()
+    const serialized = existingUser.serialize()
 
     assert.ok(serialized.data.relationships)
   })
@@ -93,7 +93,7 @@ module('Unit | Mixin | json-api-bagaaravel-serializer', function (hooks) {
   test('it does not serialize hasMany relationships for existing records when saving', async function (assert) {
     class UserAdapter extends JSONAPIAdapter {
       updateRecord (store, type, snapshot) {
-        let serialized = snapshot.record.serialize()
+        const serialized = snapshot.record.serialize()
 
         assert.notOk(serialized.data.relationships)
       }
@@ -106,9 +106,9 @@ module('Unit | Mixin | json-api-bagaaravel-serializer', function (hooks) {
     this.owner.register('adapter:user', UserAdapter)
     this.owner.register('serializer:user', UserSerializer)
 
-    let store = this.owner.lookup('service:store')
-    let existingUser = createExistingRecord(store, 'user')
-    let newProject = store.createRecord('project')
+    const store = this.owner.lookup('service:store')
+    const existingUser = createExistingRecord(store, 'user')
+    const newProject = store.createRecord('project')
 
     existingUser.projects.addObject(newProject)
     await existingUser.save()
