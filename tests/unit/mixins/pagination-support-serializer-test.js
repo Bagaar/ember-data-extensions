@@ -1,8 +1,6 @@
-/* eslint-disable ember/no-new-mixins */
-
 import PaginationSupportSerializerMixin from '@bagaaravel/ember-data-extensions/mixins/pagination-support-serializer'
-import JSONAPIAdapter from 'ember-data/adapters/json-api'
-import JSONAPISerializer from 'ember-data/serializers/json-api'
+import JSONAPIAdapter from '@ember-data/adapter/json-api'
+import JSONAPISerializer from '@ember-data/serializer/json-api'
 import { setupTest } from 'ember-qunit'
 import { module, test } from 'qunit'
 
@@ -10,7 +8,7 @@ module('Unit | Mixin | pagination-support-serializer', function (hooks) {
   setupTest(hooks)
 
   test('it creates pagination meta', async function (assert) {
-    let UserAdapter = JSONAPIAdapter.extend({
+    class UserAdapter extends JSONAPIAdapter {
       ajax () {
         return Promise.resolve({
           data: [],
@@ -27,11 +25,11 @@ module('Unit | Mixin | pagination-support-serializer', function (hooks) {
           }
         })
       }
-    })
+    }
 
-    let UserSerializer = JSONAPISerializer.extend(
+    class UserSerializer extends JSONAPISerializer.extend(
       PaginationSupportSerializerMixin
-    )
+    ) {}
 
     this.owner.register('adapter:user', UserAdapter)
     this.owner.register('serializer:user', UserSerializer)
@@ -51,9 +49,9 @@ module('Unit | Mixin | pagination-support-serializer', function (hooks) {
   })
 
   test('it triggers a deprecation warning', function (assert) {
-    let UserSerializer = JSONAPISerializer.extend(
+    class UserSerializer extends JSONAPISerializer.extend(
       PaginationSupportSerializerMixin
-    )
+    ) {}
 
     this.owner.register('serializer:user', UserSerializer)
 

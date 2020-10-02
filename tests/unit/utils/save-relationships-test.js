@@ -1,6 +1,6 @@
 import { RELATIONSHIP_ADAPTER_OPTION } from '@bagaaravel/ember-data-extensions/config'
 import saveRelationships from '@bagaaravel/ember-data-extensions/utils/save-relationships'
-import JSONAPIAdapter from 'ember-data/adapters/json-api'
+import JSONAPIAdapter from '@ember-data/adapter/json-api'
 import { setupTest } from 'ember-qunit'
 import { module, test } from 'qunit'
 import createExistingRecord from '../../helpers/create-existing-record'
@@ -22,8 +22,9 @@ module('Unit | Utility | save-relationships', function (hooks) {
 
     assert.expect(relationshipNames.length)
 
-    let UserAdapter = JSONAPIAdapter.extend({
-      ajax () {},
+    class UserAdapter extends JSONAPIAdapter {
+      ajax () {}
+
       urlForUpdateRecord (id, modelName, snapshot) {
         assert.ok(
           relationshipNames.includes(
@@ -31,7 +32,7 @@ module('Unit | Utility | save-relationships', function (hooks) {
           )
         )
       }
-    })
+    }
 
     this.owner.register('adapter:user', UserAdapter)
 

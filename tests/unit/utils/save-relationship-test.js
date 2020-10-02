@@ -1,7 +1,7 @@
 import { RELATIONSHIP_ADAPTER_OPTION } from '@bagaaravel/ember-data-extensions/config'
 import saveRelationship from '@bagaaravel/ember-data-extensions/utils/save-relationship'
-import JSONAPIAdapter from 'ember-data/adapters/json-api'
-import JSONAPISerializer from 'ember-data/serializers/json-api'
+import JSONAPIAdapter from '@ember-data/adapter/json-api'
+import JSONAPISerializer from '@ember-data/serializer/json-api'
 import { setupTest } from 'ember-qunit'
 import { module, test } from 'qunit'
 import createExistingRecord from '../../helpers/create-existing-record'
@@ -28,13 +28,13 @@ module('Unit | Utility | save-relationship', function (hooks) {
   })
 
   test('"saveRelationship" throws when the relationship can not be serialized', function (assert) {
-    let UserSerializer = JSONAPISerializer.extend({
-      attrs: {
+    class UserSerializer extends JSONAPISerializer {
+      attrs = {
         company: {
           serialize: false
         }
       }
-    })
+    }
 
     this.owner.register('serializer:user', UserSerializer)
 
@@ -49,15 +49,16 @@ module('Unit | Utility | save-relationship', function (hooks) {
   test('"saveRelationship" works', async function (assert) {
     let relationshipName = 'company'
 
-    let UserAdapter = JSONAPIAdapter.extend({
-      ajax () {},
+    class UserAdapter extends JSONAPIAdapter {
+      ajax () {}
+
       urlForUpdateRecord (id, modelName, snapshot) {
         assert.equal(
           snapshot.adapterOptions[RELATIONSHIP_ADAPTER_OPTION],
           relationshipName
         )
       }
-    })
+    }
 
     this.owner.register('adapter:user', UserAdapter)
 

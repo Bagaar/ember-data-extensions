@@ -1,14 +1,8 @@
-/* eslint-disable ember/no-new-mixins */
-
 import getRelationshipDescriptor from '@bagaaravel/ember-data-extensions/utils/get-relationship-descriptor'
 import getRelationshipName from '@bagaaravel/ember-data-extensions/utils/get-relationship-name'
 import Mixin from '@ember/object/mixin'
 
 export default Mixin.create({
-  /**
-   * Hooks
-   */
-
   serialize (snapshot) {
     let serialized = this._super(...arguments)
     let relationshipName = getRelationshipName(snapshot.adapterOptions)

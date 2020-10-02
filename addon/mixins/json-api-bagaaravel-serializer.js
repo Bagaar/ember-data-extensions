@@ -1,13 +1,7 @@
-/* eslint-disable ember/no-new-mixins */
-
 import Mixin from '@ember/object/mixin'
 import { classify, underscore } from '@ember/string'
 
 export default Mixin.create({
-  /**
-   * Hooks
-   */
-
   // Bagaaravel uses snake_case for attributes instead of kebab-case.
   // "attributeName" -> "attribute_name"
   keyForAttribute (key) {

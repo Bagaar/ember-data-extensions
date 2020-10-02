@@ -1,6 +1,4 @@
-/* eslint-disable ember/no-new-mixins */
-
-import JSONAPISerializer from 'ember-data/serializers/json-api'
+import JSONAPISerializer from '@ember-data/serializer/json-api'
 import { setupTest } from 'ember-qunit'
 import { module, test } from 'qunit'
 import createExistingRecord from '../../helpers/create-existing-record'
@@ -39,13 +37,13 @@ module('Unit | Mixin | relationship-support-model', function (hooks) {
   })
 
   test('"saveRelationship" throws when the relationship can not be serialized', function (assert) {
-    let UserSerializer = JSONAPISerializer.extend({
-      attrs: {
+    class UserSerializer extends JSONAPISerializer {
+      attrs = {
         company: {
           serialize: false
         }
       }
-    })
+    }
 
     this.owner.register('serializer:user', UserSerializer)
 
