@@ -9,8 +9,8 @@ module('Unit | Utility | save-relationships', function (hooks) {
   setupTest(hooks)
 
   test('"saveRelationships" throws when the record is new', function (assert) {
-    let store = this.owner.lookup('service:store')
-    let newUser = store.createRecord('user')
+    const store = this.owner.lookup('service:store')
+    const newUser = store.createRecord('user')
 
     assert.throws(() => {
       saveRelationships(newUser, 'company', 'projects')
@@ -18,7 +18,7 @@ module('Unit | Utility | save-relationships', function (hooks) {
   })
 
   test('"saveRelationships" works', async function (assert) {
-    let relationshipNames = ['company', 'projects']
+    const relationshipNames = ['company', 'projects']
 
     assert.expect(relationshipNames.length)
 
@@ -36,8 +36,8 @@ module('Unit | Utility | save-relationships', function (hooks) {
 
     this.owner.register('adapter:user', UserAdapter)
 
-    let store = this.owner.lookup('service:store')
-    let existingUser = createExistingRecord(store, 'user')
+    const store = this.owner.lookup('service:store')
+    const existingUser = createExistingRecord(store, 'user')
 
     await saveRelationships(existingUser, ...relationshipNames)
   })

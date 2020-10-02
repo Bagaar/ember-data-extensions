@@ -20,8 +20,8 @@ module('Unit | Mixin | relationship-support-adapter', function (hooks) {
 
     this.owner.register('adapter:user', UserAdapter)
 
-    let store = this.owner.lookup('service:store')
-    let existingUser = createExistingRecord(store, 'user')
+    const store = this.owner.lookup('service:store')
+    const existingUser = createExistingRecord(store, 'user')
 
     await existingUser.saveRelationship('projects')
 

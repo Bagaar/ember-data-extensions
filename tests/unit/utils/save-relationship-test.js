@@ -10,8 +10,8 @@ module('Unit | Utility | save-relationship', function (hooks) {
   setupTest(hooks)
 
   test('"saveRelationship" throws when the record is new', function (assert) {
-    let store = this.owner.lookup('service:store')
-    let newUser = store.createRecord('user')
+    const store = this.owner.lookup('service:store')
+    const newUser = store.createRecord('user')
 
     assert.throws(() => {
       saveRelationship(newUser, 'company')
@@ -19,8 +19,8 @@ module('Unit | Utility | save-relationship', function (hooks) {
   })
 
   test('"saveRelationship" throws when the relationship name is not valid', function (assert) {
-    let store = this.owner.lookup('service:store')
-    let existingUser = createExistingRecord(store, 'user')
+    const store = this.owner.lookup('service:store')
+    const existingUser = createExistingRecord(store, 'user')
 
     assert.throws(() => {
       saveRelationship(existingUser, 'invalid-relationship-name')
@@ -38,8 +38,8 @@ module('Unit | Utility | save-relationship', function (hooks) {
 
     this.owner.register('serializer:user', UserSerializer)
 
-    let store = this.owner.lookup('service:store')
-    let existingUser = createExistingRecord(store, 'user')
+    const store = this.owner.lookup('service:store')
+    const existingUser = createExistingRecord(store, 'user')
 
     assert.throws(() => {
       saveRelationship(existingUser, 'company')
@@ -47,7 +47,7 @@ module('Unit | Utility | save-relationship', function (hooks) {
   })
 
   test('"saveRelationship" works', async function (assert) {
-    let relationshipName = 'company'
+    const relationshipName = 'company'
 
     class UserAdapter extends JSONAPIAdapter {
       ajax () {}
@@ -62,8 +62,8 @@ module('Unit | Utility | save-relationship', function (hooks) {
 
     this.owner.register('adapter:user', UserAdapter)
 
-    let store = this.owner.lookup('service:store')
-    let existingUser = createExistingRecord(store, 'user')
+    const store = this.owner.lookup('service:store')
+    const existingUser = createExistingRecord(store, 'user')
 
     await saveRelationship(existingUser, relationshipName)
   })

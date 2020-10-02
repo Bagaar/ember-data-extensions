@@ -6,9 +6,12 @@ module('Unit | Utility | get-relationship-descriptor', function (hooks) {
   setupTest(hooks)
 
   test('it returns the relationship descriptor', function (assert) {
-    let store = this.owner.lookup('service:store')
-    let newUser = store.createRecord('user')
-    let relationshipDescriptor = getRelationshipDescriptor(newUser, 'projects')
+    const store = this.owner.lookup('service:store')
+    const newUser = store.createRecord('user')
+    const relationshipDescriptor = getRelationshipDescriptor(
+      newUser,
+      'projects'
+    )
 
     assert.equal(relationshipDescriptor.kind, 'hasMany')
   })

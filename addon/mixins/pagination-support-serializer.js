@@ -20,7 +20,7 @@ export default Mixin.create({
   },
 
   normalizeQueryResponse () {
-    let normalized = this._super(...arguments)
+    const normalized = this._super(...arguments)
 
     if (hasPaginationLinks(normalized.links)) {
       normalized.meta.pagination = createPaginationMeta(
@@ -54,13 +54,13 @@ function extractPageNumberFromLink (link) {
     return NO_PAGE_NUMBER
   }
 
-  let query = extractQueryFromLink(link)
+  const query = extractQueryFromLink(link)
 
   if (!query) {
     return NO_PAGE_NUMBER
   }
 
-  let params = splitQueryIntoSeparateParams(query)
+  const params = splitQueryIntoSeparateParams(query)
 
   if (params.length === 0) {
     return NO_PAGE_NUMBER
@@ -69,8 +69,8 @@ function extractPageNumberFromLink (link) {
   let page
 
   params.some(param => {
-    let [key, value] = splitParamIntoKeyValue(param)
-    let isPageParam = key === PAGE_PARAM_KEY
+    const [key, value] = splitParamIntoKeyValue(param)
+    const isPageParam = key === PAGE_PARAM_KEY
 
     if (isPageParam) {
       page = value

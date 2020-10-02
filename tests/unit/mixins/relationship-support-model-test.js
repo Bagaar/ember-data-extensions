@@ -7,7 +7,7 @@ module('Unit | Mixin | relationship-support-model', function (hooks) {
   setupTest(hooks)
 
   test('it triggers a deprecation warning', function (assert) {
-    let store = this.owner.lookup('service:store')
+    const store = this.owner.lookup('service:store')
 
     assert.expectDeprecation(() => {
       store.createRecord('user')
@@ -19,8 +19,8 @@ module('Unit | Mixin | relationship-support-model', function (hooks) {
    */
 
   test('"saveRelationship" throws when the record is new', function (assert) {
-    let store = this.owner.lookup('service:store')
-    let newUser = store.createRecord('user')
+    const store = this.owner.lookup('service:store')
+    const newUser = store.createRecord('user')
 
     assert.throws(() => {
       newUser.saveRelationship('company')
@@ -28,8 +28,8 @@ module('Unit | Mixin | relationship-support-model', function (hooks) {
   })
 
   test('"saveRelationship" throws when the relationship name is not valid', function (assert) {
-    let store = this.owner.lookup('service:store')
-    let existingUser = createExistingRecord(store, 'user')
+    const store = this.owner.lookup('service:store')
+    const existingUser = createExistingRecord(store, 'user')
 
     assert.throws(() => {
       existingUser.saveRelationship('invalid-relationship-name')
@@ -47,8 +47,8 @@ module('Unit | Mixin | relationship-support-model', function (hooks) {
 
     this.owner.register('serializer:user', UserSerializer)
 
-    let store = this.owner.lookup('service:store')
-    let existingUser = createExistingRecord(store, 'user')
+    const store = this.owner.lookup('service:store')
+    const existingUser = createExistingRecord(store, 'user')
 
     assert.throws(() => {
       existingUser.saveRelationship('company')
@@ -60,8 +60,8 @@ module('Unit | Mixin | relationship-support-model', function (hooks) {
    */
 
   test('"saveRelationships" throws when the record is new', function (assert) {
-    let store = this.owner.lookup('service:store')
-    let newUser = store.createRecord('user')
+    const store = this.owner.lookup('service:store')
+    const newUser = store.createRecord('user')
 
     assert.throws(() => {
       newUser.saveRelationships('company', 'projects')

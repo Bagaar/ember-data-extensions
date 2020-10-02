@@ -26,8 +26,8 @@ export default function saveRelationship (record, relationshipName) {
 }
 
 function canSerializeRelationship (record, relationshipName) {
-  let serializer = record.store.serializerFor(record.constructor.modelName)
-  let { attrs } = serializer
+  const serializer = record.store.serializerFor(record.constructor.modelName)
+  const { attrs } = serializer
 
   return (
     !attrs ||

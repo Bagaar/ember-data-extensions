@@ -26,8 +26,8 @@ module('Unit | Mixin | relationship-support-serializer', function (hooks) {
     this.owner.register('adapter:user', UserAdapter)
     this.owner.register('serializer:user', UserSerializer)
 
-    let store = this.owner.lookup('service:store')
-    let existingUser = createExistingRecord(store, 'user', {
+    const store = this.owner.lookup('service:store')
+    const existingUser = createExistingRecord(store, 'user', {
       firstName: 'First Name'
     })
 
@@ -61,8 +61,8 @@ module('Unit | Mixin | relationship-support-serializer', function (hooks) {
     this.owner.register('adapter:user', UserAdapter)
     this.owner.register('serializer:user', UserSerializer)
 
-    let store = this.owner.lookup('service:store')
-    let existingUser = createExistingRecord(store, 'user')
+    const store = this.owner.lookup('service:store')
+    const existingUser = createExistingRecord(store, 'user')
 
     await existingUser.saveRelationship('company')
 
@@ -70,7 +70,7 @@ module('Unit | Mixin | relationship-support-serializer', function (hooks) {
       data: null
     })
 
-    let existingCompany = createExistingRecord(store, 'company')
+    const existingCompany = createExistingRecord(store, 'company')
 
     existingUser.set('company', existingCompany)
 
@@ -101,8 +101,8 @@ module('Unit | Mixin | relationship-support-serializer', function (hooks) {
     this.owner.register('adapter:user', UserAdapter)
     this.owner.register('serializer:user', UserSerializer)
 
-    let store = this.owner.lookup('service:store')
-    let existingUser = createExistingRecord(store, 'user')
+    const store = this.owner.lookup('service:store')
+    const existingUser = createExistingRecord(store, 'user')
 
     await existingUser.saveRelationship('projects')
 
@@ -110,7 +110,7 @@ module('Unit | Mixin | relationship-support-serializer', function (hooks) {
       data: []
     })
 
-    let existingProject = createExistingRecord(store, 'project')
+    const existingProject = createExistingRecord(store, 'project')
 
     existingUser.projects.addObject(existingProject)
 
