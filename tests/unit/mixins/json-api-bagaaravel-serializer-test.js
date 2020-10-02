@@ -1,8 +1,6 @@
-/* eslint-disable ember/no-new-mixins */
-
 import JSONAPIBagaaravelSerializerMixin from '@bagaaravel/ember-data-extensions/mixins/json-api-bagaaravel-serializer'
-import JSONAPIAdapter from 'ember-data/adapters/json-api'
-import JSONAPISerializer from 'ember-data/serializers/json-api'
+import JSONAPIAdapter from '@ember-data/adapter/json-api'
+import JSONAPISerializer from '@ember-data/serializer/json-api'
 import { setupTest } from 'ember-qunit'
 import { module, test } from 'qunit'
 import createExistingRecord from '../../helpers/create-existing-record'
@@ -11,9 +9,9 @@ module('Unit | Mixin | json-api-bagaaravel-serializer', function (hooks) {
   setupTest(hooks)
 
   test('it underscores attributes', function (assert) {
-    let UserSerializer = JSONAPISerializer.extend(
+    class UserSerializer extends JSONAPISerializer.extend(
       JSONAPIBagaaravelSerializerMixin
-    )
+    ) {}
 
     this.owner.register('serializer:user', UserSerializer)
 
@@ -25,9 +23,9 @@ module('Unit | Mixin | json-api-bagaaravel-serializer', function (hooks) {
   })
 
   test('it leaves relationships untouched', function (assert) {
-    let UserSerializer = JSONAPISerializer.extend(
+    class UserSerializer extends JSONAPISerializer.extend(
       JSONAPIBagaaravelSerializerMixin
-    )
+    ) {}
 
     this.owner.register('serializer:user', UserSerializer)
 
@@ -43,9 +41,9 @@ module('Unit | Mixin | json-api-bagaaravel-serializer', function (hooks) {
   })
 
   test('it classifies the model name', function (assert) {
-    let UserSerializer = JSONAPISerializer.extend(
+    class UserSerializer extends JSONAPISerializer.extend(
       JSONAPIBagaaravelSerializerMixin
-    )
+    ) {}
 
     this.owner.register('serializer:user', UserSerializer)
 
@@ -57,9 +55,9 @@ module('Unit | Mixin | json-api-bagaaravel-serializer', function (hooks) {
   })
 
   test('it serializes hasMany relationships for new records', function (assert) {
-    let UserSerializer = JSONAPISerializer.extend(
+    class UserSerializer extends JSONAPISerializer.extend(
       JSONAPIBagaaravelSerializerMixin
-    )
+    ) {}
 
     this.owner.register('serializer:user', UserSerializer)
 
@@ -75,9 +73,9 @@ module('Unit | Mixin | json-api-bagaaravel-serializer', function (hooks) {
   })
 
   test('it serializes hasMany relationships for existing records', function (assert) {
-    let UserSerializer = JSONAPISerializer.extend(
+    class UserSerializer extends JSONAPISerializer.extend(
       JSONAPIBagaaravelSerializerMixin
-    )
+    ) {}
 
     this.owner.register('serializer:user', UserSerializer)
 
@@ -93,17 +91,17 @@ module('Unit | Mixin | json-api-bagaaravel-serializer', function (hooks) {
   })
 
   test('it does not serialize hasMany relationships for existing records when saving', async function (assert) {
-    let UserAdapter = JSONAPIAdapter.extend({
+    class UserAdapter extends JSONAPIAdapter {
       updateRecord (store, type, snapshot) {
         let serialized = snapshot.record.serialize()
 
         assert.notOk(serialized.data.relationships)
       }
-    })
+    }
 
-    let UserSerializer = JSONAPISerializer.extend(
+    class UserSerializer extends JSONAPISerializer.extend(
       JSONAPIBagaaravelSerializerMixin
-    )
+    ) {}
 
     this.owner.register('adapter:user', UserAdapter)
     this.owner.register('serializer:user', UserSerializer)

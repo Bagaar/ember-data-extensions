@@ -1,7 +1,5 @@
-/* eslint-disable ember/no-new-mixins */
-
 import RelationshipSupportAdapterMixin from '@bagaaravel/ember-data-extensions/mixins/relationship-support-adapter'
-import JSONAPIAdapter from 'ember-data/adapters/json-api'
+import JSONAPIAdapter from '@ember-data/adapter/json-api'
 import { setupTest } from 'ember-qunit'
 import { module, test } from 'qunit'
 import createExistingRecord from '../../helpers/create-existing-record'
@@ -12,11 +10,13 @@ module('Unit | Mixin | relationship-support-adapter', function (hooks) {
   test('it generates the correct update url', async function (assert) {
     let urlForUpdateRecord
 
-    let UserAdapter = JSONAPIAdapter.extend(RelationshipSupportAdapterMixin, {
+    class UserAdapter extends JSONAPIAdapter.extend(
+      RelationshipSupportAdapterMixin
+    ) {
       ajax (url) {
         urlForUpdateRecord = url
       }
-    })
+    }
 
     this.owner.register('adapter:user', UserAdapter)
 

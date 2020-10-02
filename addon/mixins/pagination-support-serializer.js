@@ -1,5 +1,3 @@
-/* eslint-disable ember/no-new-mixins */
-
 import { deprecate } from '@ember/debug'
 import Mixin from '@ember/object/mixin'
 
@@ -7,10 +5,6 @@ const NO_PAGE_NUMBER = null
 const PAGE_PARAM_KEY = 'page'
 
 export default Mixin.create({
-  /**
-   * Hooks
-   */
-
   init () {
     this._super(...arguments)
 
