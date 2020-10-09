@@ -6,7 +6,7 @@ export default Mixin.create({
   serialize (snapshot) {
     const serialized = this._super(...arguments)
     const relationshipName = getRelationshipName(snapshot.adapterOptions)
-    const isSavingRelationship = !!relationshipName
+    const isSavingRelationship = Boolean(relationshipName)
 
     if (!isSavingRelationship) {
       return serialized

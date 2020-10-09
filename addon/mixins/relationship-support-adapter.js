@@ -7,7 +7,7 @@ export default Mixin.create({
   urlForUpdateRecord (id, modelName, snapshot) {
     const urlForUpdateRecord = this._super(...arguments)
     const relationshipName = getRelationshipName(snapshot.adapterOptions)
-    const isSavingRelationship = !!relationshipName
+    const isSavingRelationship = Boolean(relationshipName)
 
     if (isSavingRelationship) {
       return `${urlForUpdateRecord}/relationships/${relationshipName}`

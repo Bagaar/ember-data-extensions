@@ -34,7 +34,7 @@ export default Mixin.create({
 })
 
 function hasPaginationLinks (links) {
-  return !!links && typeof links.first !== 'undefined'
+  return Boolean(links) && typeof links.first !== 'undefined'
 }
 
 function createPaginationMeta (links, meta) {
