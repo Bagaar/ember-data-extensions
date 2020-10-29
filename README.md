@@ -87,7 +87,7 @@ Eventually, we can use the `saveRelationship` and `saveRelationships` utils to u
 import saveRelationship from '@bagaaravel/ember-data-extensions/utils/save-relationship'
 import saveRelationships from '@bagaaravel/ember-data-extensions/utils/save-relationships'
 
-const user = store.findRecord('user', 1)
+const user = await store.findRecord('user', '1')
 
 saveRelationship(user, 'projects') // Will update the user's projects.
 saveRelationship(user, 'company') // Also works for `belongsTo` relationships.
