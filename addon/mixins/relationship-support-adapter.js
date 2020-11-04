@@ -1,4 +1,4 @@
-import getRelationshipName from '@bagaaravel/ember-data-extensions/utils/get-relationship-name'
+import { getRelationshipName } from '@bagaaravel/ember-data-extensions/-private/utils'
 import Mixin from '@ember/object/mixin'
 
 export default Mixin.create({

@@ -1,4 +1,4 @@
-import { RELATIONSHIP_ADAPTER_OPTION } from '@bagaaravel/ember-data-extensions/config'
+import { RELATIONSHIP_ADAPTER_OPTION } from '@bagaaravel/ember-data-extensions/-private/config'
 import saveRelationship from '@bagaaravel/ember-data-extensions/utils/save-relationship'
 import JSONAPIAdapter from '@ember-data/adapter/json-api'
 import JSONAPISerializer from '@ember-data/serializer/json-api'

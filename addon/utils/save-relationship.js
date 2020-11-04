@@ -1,5 +1,5 @@
-import { RELATIONSHIP_ADAPTER_OPTION } from '@bagaaravel/ember-data-extensions/config'
-import getRelationshipDescriptor from '@bagaaravel/ember-data-extensions/utils/get-relationship-descriptor'
+import { RELATIONSHIP_ADAPTER_OPTION } from '@bagaaravel/ember-data-extensions/-private/config'
+import { getRelationshipDescriptor } from '@bagaaravel/ember-data-extensions/-private/utils'
 import { assert } from '@ember/debug'
 
 export default function saveRelationship (record, relationshipName) {
