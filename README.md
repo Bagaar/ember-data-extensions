@@ -20,7 +20,7 @@ Ember Data extensions to communicate with the Bagaaravel JSON API implementation
 
 ## Support
 
-**`@bagaaravel/ember-data-extensions` supports Ember v3.16 and up.**
+`@bagaaravel/ember-data-extensions` supports **Ember v3.16 and up**.
 
 ## Installation
 
@@ -30,58 +30,71 @@ ember install @bagaaravel/ember-data-extensions
 
 ## Usage
 
-### 1\. Basic Support
-
-First, we need to make sure that payloads sent to and received from Bagaaravel are correctly serialized and normalized.
+### 1\. Extend the Application Serializer
 
 ```javascript
 // app/serializers/application.js
 
-import JSONAPIBagaaravelSerializerMixin from '@bagaaravel/ember-data-extensions/mixins/json-api-bagaaravel-serializer'
+import {
+  keyForAttribute,
+  keyForRelationship,
+  payloadKeyFromModelName,
+  serialize,
+  shouldSerializeHasMany
+} from '@bagaaravel/ember-data-extensions/serializer'
 import JSONAPISerializer from '@ember-data/serializer/json-api'
 
-export default class ApplicationSerializer extends JSONAPISerializer.extend(
-  JSONAPIBagaaravelSerializerMixin
-) {}
+export default class ApplicationSerializer extends JSONAPISerializer {
+  // Makes sure attribute keys have the correct casing.
+  keyForAttribute () {
+    return keyForAttribute(...arguments)
+  }
+
+  // Makes sure relationship keys have the correct casing.
+  keyForRelationship () {
+    return keyForRelationship(...arguments)
+  }
+
+  // Makes sure model types have the correct casing.
+  payloadKeyFromModelName () {
+    return payloadKeyFromModelName(...arguments)
+  }
+
+  // Makes sure relationships are correctly serialized.
+  serialize () {
+    const serialized = super.serialize(...arguments)
+
+    return serialize(serialized, ...arguments)
+  }
+
+  // Checks when 'hasMany' relationships should be serialized.
+  shouldSerializeHasMany () {
+    const superCheck = super.shouldSerializeHasMany(...arguments)
+
+    return shouldSerializeHasMany(superCheck, ...arguments)
+  }
+}
 ```
 
-This will make sure that attribute keys, relationship keys and model types have the correct casing.
-
-This will also prevent serializing `hasMany` relationships when updating records. More info about this in the [Updating Relationships](#2-updating-relationships) section.
-
-### 2\. Updating Relationships
-
-Bagaaravel does not allow updating `hasMany` relationships via the resource record. That is why the `JSONAPIBagaaravelSerializerMixin` does not serialize `hasMany` relationships when updating records. However, Bagaaravel _does_ allow updating `hasMany` relationships by executing a separate `PATCH` request to a [relationship link](https://jsonapi.org/format/#document-resource-object-related-resource-links).
-
-First, we need to update the `application` adapter.
+### 2\. Extend the Application Adapter
 
 ```javascript
 // app/adapters/application.js
 
-import RelationshipSupportAdapterMixin from '@bagaaravel/ember-data-extensions/mixins/relationship-support-adapter'
+import { urlForUpdateRecord } from '@bagaaravel/ember-data-extensions/adapter'
 import JSONAPIAdapter from '@ember-data/adapter/json-api'
 
-export default class ApplicationAdapter extends JSONAPIAdapter.extend(
-  RelationshipSupportAdapterMixin
-) {}
+export default class ApplicationAdapter extends JSONAPIAdapter {
+  // Makes sure the correct URL is used when only saving a relationship.
+  urlForUpdateRecord () {
+    const baseUrl = super.urlForUpdateRecord(...arguments)
+
+    return urlForUpdateRecord(baseUrl, ...arguments)
+  }
+}
 ```
 
-Then, we need to update the `application` serializer.
-
-```javascript
-// app/serializers/application.js
-
-import JSONAPIBagaaravelSerializerMixin from '@bagaaravel/ember-data-extensions/mixins/json-api-bagaaravel-serializer'
-import RelationshipSupportSerializerMixin from '@bagaaravel/ember-data-extensions/mixins/relationship-support-serializer'
-import JSONAPISerializer from '@ember-data/serializer/json-api'
-
-export default class ApplicationSerializer extends JSONAPISerializer.extend(
-  JSONAPIBagaaravelSerializerMixin,
-  RelationshipSupportSerializerMixin
-) {}
-```
-
-Eventually, we can use the `saveRelationship` and `saveRelationships` utils to update relationships via a separate `PATCH` request.
+### 3\. Updating Relationships
 
 ```javascript
 import {
@@ -91,9 +104,14 @@ import {
 
 const user = await this.store.findRecord('user', '1')
 
-saveRelationship(user, 'projects') // Will update the user's projects.
-saveRelationship(user, 'company') // Also works for `belongsTo` relationships.
-saveRelationships(user, 'projects', 'company') // Shorthand for updating multiple relationships.
+// Will update the user's projects.
+saveRelationship(user, 'projects')
+
+// Also works for 'belongsTo' relationships.
+saveRelationship(user, 'company')
+
+// Shorthand for updating multiple relationships.
+saveRelationships(user, 'projects', 'company')
 ```
 
 ## Contributing
