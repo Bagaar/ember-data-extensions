@@ -8,7 +8,7 @@ import createExistingRecord from '../helpers/create-existing-record'
 module('Unit | Adapter', function (hooks) {
   setupTest(hooks)
 
-  test('it generates the correct update url', async function (assert) {
+  test('urlForUpdateRecord: it generates the correct update url', async function (assert) {
     let updateUrl
 
     class UserAdapter extends JSONAPIAdapter {

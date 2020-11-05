@@ -46,14 +46,14 @@ module('Unit | Serializer', function (hooks) {
     this.owner.register('serializer:user', UserSerializer)
   })
 
-  test('it underscores attributes', function (assert) {
+  test('keyForAttribute: it underscores attributes', function (assert) {
     const newUser = this.store.createRecord('user', { firstName: 'First Name' })
     const serialized = newUser.serialize()
 
     assert.equal(serialized.data.attributes.first_name, 'First Name')
   })
 
-  test('it leaves relationships untouched', function (assert) {
+  test('keyForRelationship: it leaves relationships untouched', function (assert) {
     const newUser = this.store.createRecord('user')
     const newProject = this.store.createRecord('project')
 
@@ -64,55 +64,14 @@ module('Unit | Serializer', function (hooks) {
     assert.ok(serialized.data.relationships.favoriteProjects)
   })
 
-  test('it classifies the model name', function (assert) {
+  test('payloadKeyFromModelName: it classifies the model name', function (assert) {
     const newUser = this.store.createRecord('user')
     const serialized = newUser.serialize()
 
     assert.equal(serialized.data.type, 'User')
   })
 
-  test('it serializes hasMany relationships for new records', function (assert) {
-    const newUser = this.store.createRecord('user')
-    const newProject = this.store.createRecord('project')
-
-    newUser.projects.addObject(newProject)
-
-    const serialized = newUser.serialize()
-
-    assert.ok(serialized.data.relationships.projects)
-  })
-
-  test('it serializes hasMany relationships for existing records', function (assert) {
-    const existingUser = createExistingRecord(this.store, 'user')
-    const newProject = this.store.createRecord('project')
-
-    existingUser.projects.addObject(newProject)
-
-    const serialized = existingUser.serialize()
-
-    assert.ok(serialized.data.relationships)
-  })
-
-  test('it does not serialize hasMany relationships for existing records when saving', async function (assert) {
-    class UserAdapter extends JSONAPIAdapter {
-      updateRecord (store, type, snapshot) {
-        const serialized = snapshot.record.serialize()
-
-        assert.notOk(serialized.data.relationships)
-      }
-    }
-
-    this.owner.register('adapter:user', UserAdapter)
-
-    const existingUser = createExistingRecord(this.store, 'user')
-    const newProject = this.store.createRecord('project')
-
-    existingUser.projects.addObject(newProject)
-
-    await existingUser.save()
-  })
-
-  test('saving a record', async function (assert) {
+  test('serialize: saving a record', async function (assert) {
     let serialized
 
     class UserAdapter extends JSONAPIAdapter {
@@ -140,7 +99,7 @@ module('Unit | Serializer', function (hooks) {
     })
   })
 
-  test('saving a belongsTo relationship', async function (assert) {
+  test('serialize: saving a belongsTo relationship', async function (assert) {
     let serialized
 
     class UserAdapter extends JSONAPIAdapter {
@@ -173,7 +132,7 @@ module('Unit | Serializer', function (hooks) {
     })
   })
 
-  test('saving an hasMany relationship', async function (assert) {
+  test('serialize: saving an hasMany relationship', async function (assert) {
     let serialized
 
     class UserAdapter extends JSONAPIAdapter {
@@ -206,5 +165,46 @@ module('Unit | Serializer', function (hooks) {
         }
       ]
     })
+  })
+
+  test('shouldSerializeHasMany: it serializes hasMany relationships for new records', function (assert) {
+    const newUser = this.store.createRecord('user')
+    const newProject = this.store.createRecord('project')
+
+    newUser.projects.addObject(newProject)
+
+    const serialized = newUser.serialize()
+
+    assert.ok(serialized.data.relationships.projects)
+  })
+
+  test('shouldSerializeHasMany: it serializes hasMany relationships for existing records', function (assert) {
+    const existingUser = createExistingRecord(this.store, 'user')
+    const newProject = this.store.createRecord('project')
+
+    existingUser.projects.addObject(newProject)
+
+    const serialized = existingUser.serialize()
+
+    assert.ok(serialized.data.relationships)
+  })
+
+  test('shouldSerializeHasMany: it does not serialize hasMany relationships for existing records when saving', async function (assert) {
+    class UserAdapter extends JSONAPIAdapter {
+      updateRecord (store, type, snapshot) {
+        const serialized = snapshot.record.serialize()
+
+        assert.notOk(serialized.data.relationships)
+      }
+    }
+
+    this.owner.register('adapter:user', UserAdapter)
+
+    const existingUser = createExistingRecord(this.store, 'user')
+    const newProject = this.store.createRecord('project')
+
+    existingUser.projects.addObject(newProject)
+
+    await existingUser.save()
   })
 })

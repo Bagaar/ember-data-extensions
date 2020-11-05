@@ -9,14 +9,14 @@ import { setupTest } from 'ember-qunit'
 import { module, test } from 'qunit'
 import createExistingRecord from '../helpers/create-existing-record'
 
-module('Unit | Model | save-relationship', function (hooks) {
+module('Unit | Model', function (hooks) {
   setupTest(hooks)
 
   hooks.beforeEach(function () {
     this.store = this.owner.lookup('service:store')
   })
 
-  test('"saveRelationship" throws when the record is new', function (assert) {
+  test('saveRelationship: it throws when the record is new', function (assert) {
     const newUser = this.store.createRecord('user')
 
     assert.throws(() => {
@@ -24,7 +24,7 @@ module('Unit | Model | save-relationship', function (hooks) {
     })
   })
 
-  test('"saveRelationship" throws when the relationship name is not valid', function (assert) {
+  test('saveRelationship: it throws when the relationship name is not valid', function (assert) {
     const existingUser = createExistingRecord(this.store, 'user')
 
     assert.throws(() => {
@@ -32,7 +32,7 @@ module('Unit | Model | save-relationship', function (hooks) {
     })
   })
 
-  test('"saveRelationship" throws when the relationship can not be serialized', function (assert) {
+  test('saveRelationship: it throws when the relationship can not be serialized', function (assert) {
     class UserSerializer extends JSONAPISerializer {
       attrs = {
         company: {
@@ -50,7 +50,7 @@ module('Unit | Model | save-relationship', function (hooks) {
     })
   })
 
-  test('"saveRelationship" works', async function (assert) {
+  test('saveRelationship: it works', async function (assert) {
     const relationshipName = 'company'
 
     class UserAdapter extends JSONAPIAdapter {
@@ -70,16 +70,8 @@ module('Unit | Model | save-relationship', function (hooks) {
 
     await saveRelationship(existingUser, relationshipName)
   })
-})
 
-module('Unit | Model | save-relationships', function (hooks) {
-  setupTest(hooks)
-
-  hooks.beforeEach(function () {
-    this.store = this.owner.lookup('service:store')
-  })
-
-  test('"saveRelationships" throws when the record is new', function (assert) {
+  test('saveRelationships: it throws when the record is new', function (assert) {
     const newUser = this.store.createRecord('user')
 
     assert.throws(() => {
@@ -87,7 +79,7 @@ module('Unit | Model | save-relationships', function (hooks) {
     })
   })
 
-  test('"saveRelationships" works', async function (assert) {
+  test('saveRelationships: it works', async function (assert) {
     const relationshipNames = ['company', 'projects']
 
     assert.expect(relationshipNames.length)
