@@ -1,6 +1,6 @@
 # Bagaaravel Ember Data Extensions
 
-[![NPM Version](https://badge.fury.io/js/%40bagaaravel%2Fember-data-extensions.svg)](https://badge.fury.io/js/%40bagaaravel%2Fember-data-extensions) [![Build Status](https://travis-ci.com/Bagaar/ember-data-extensions.svg?branch=master)](https://travis-ci.com/Bagaar/ember-data-extensions) [![Ember Observer Score](https://emberobserver.com/badges/-bagaaravel-ember-data-extensions.svg)](https://emberobserver.com/addons/@bagaaravel/ember-data-extensions) [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+[![NPM Version](https://badge.fury.io/js/%40bagaaravel%2Fember-data-extensions.svg)](https://badge.fury.io/js/%40bagaaravel%2Fember-data-extensions) [![Build Status](https://travis-ci.com/Bagaar/ember-data-extensions.svg?branch=master)](https://travis-ci.com/Bagaar/ember-data-extensions) [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
 Ember Data extensions to communicate with the Bagaaravel JSON API implementation.
 
@@ -45,29 +45,29 @@ import {
 import JSONAPISerializer from '@ember-data/serializer/json-api'
 
 export default class ApplicationSerializer extends JSONAPISerializer {
-  // Makes sure attribute keys have the correct casing.
+  // Make sure attribute keys have the correct casing:
   keyForAttribute () {
     return keyForAttribute(...arguments)
   }
 
-  // Makes sure relationship keys have the correct casing.
+  // Make sure relationship keys have the correct casing:
   keyForRelationship () {
     return keyForRelationship(...arguments)
   }
 
-  // Makes sure model types have the correct casing.
+  // Make sure model types have the correct casing:
   payloadKeyFromModelName () {
     return payloadKeyFromModelName(...arguments)
   }
 
-  // Makes sure relationships are correctly serialized.
+  // Make sure relationships are correctly serialized:
   serialize () {
     const serialized = super.serialize(...arguments)
 
     return serialize(serialized, ...arguments)
   }
 
-  // Checks when 'hasMany' relationships should be serialized.
+  // Check when 'hasMany' relationships should be serialized:
   shouldSerializeHasMany () {
     const superCheck = super.shouldSerializeHasMany(...arguments)
 
@@ -85,7 +85,7 @@ import { urlForUpdateRecord } from '@bagaaravel/ember-data-extensions/adapter'
 import JSONAPIAdapter from '@ember-data/adapter/json-api'
 
 export default class ApplicationAdapter extends JSONAPIAdapter {
-  // Makes sure the correct URL is used when only saving a relationship.
+  // Make sure the correct URL is used when only saving a relationship:
   urlForUpdateRecord () {
     const baseUrl = super.urlForUpdateRecord(...arguments)
 
@@ -104,13 +104,13 @@ import {
 
 const user = await this.store.findRecord('user', '1')
 
-// Will update the user's projects.
+// Update the user's projects:
 saveRelationship(user, 'projects')
 
-// Also works for 'belongsTo' relationships.
+// Update the user's company:
 saveRelationship(user, 'company')
 
-// Shorthand for updating multiple relationships.
+// Update the user's projects and company:
 saveRelationships(user, 'projects', 'company')
 ```
 
