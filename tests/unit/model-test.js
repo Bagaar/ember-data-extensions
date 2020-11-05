@@ -75,7 +75,7 @@ module('Unit | Model', function (hooks) {
     const newUser = this.store.createRecord('user')
 
     assert.throws(() => {
-      saveRelationships(newUser, 'company', 'projects')
+      saveRelationships(newUser, ['company', 'projects'])
     })
   })
 
@@ -100,6 +100,6 @@ module('Unit | Model', function (hooks) {
 
     const existingUser = createExistingRecord(this.store, 'user')
 
-    await saveRelationships(existingUser, ...relationshipNames)
+    await saveRelationships(existingUser, relationshipNames)
   })
 })

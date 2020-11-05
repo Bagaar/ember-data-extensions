@@ -25,7 +25,7 @@ export function saveRelationship (record, relationshipName) {
   })
 }
 
-export function saveRelationships (record, ...relationshipNames) {
+export function saveRelationships (record, relationshipNames) {
   assert(
     '@bagaaravel/ember-data-extensions: Cannot save relationships of a newly created record.',
     !record.isNew

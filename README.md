@@ -111,7 +111,7 @@ saveRelationship(user, 'projects')
 saveRelationship(user, 'company')
 
 // Update the user's projects and company:
-saveRelationships(user, 'projects', 'company')
+saveRelationships(user, ['projects', 'company'])
 ```
 
 ## Contributing
