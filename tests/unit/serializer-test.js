@@ -1,17 +1,24 @@
-import JSONAPIBagaaravelSerializerMixin from '@bagaaravel/ember-data-extensions/mixins/json-api-bagaaravel-serializer'
+import {
+  keyForAttribute,
+  keyForRelationship,
+  payloadKeyFromModelName,
+  shouldSerializeHasMany
+} from '@bagaaravel/ember-data-extensions/serializer'
 import JSONAPIAdapter from '@ember-data/adapter/json-api'
 import JSONAPISerializer from '@ember-data/serializer/json-api'
 import { setupTest } from 'ember-qunit'
 import { module, test } from 'qunit'
-import createExistingRecord from '../../helpers/create-existing-record'
+import createExistingRecord from '../helpers/create-existing-record'
 
-module('Unit | Mixin | json-api-bagaaravel-serializer', function (hooks) {
+module('Unit | Serializer', function (hooks) {
   setupTest(hooks)
 
   test('it underscores attributes', function (assert) {
-    class UserSerializer extends JSONAPISerializer.extend(
-      JSONAPIBagaaravelSerializerMixin
-    ) {}
+    class UserSerializer extends JSONAPISerializer {
+      keyForAttribute () {
+        return keyForAttribute(...arguments)
+      }
+    }
 
     this.owner.register('serializer:user', UserSerializer)
 
@@ -23,9 +30,11 @@ module('Unit | Mixin | json-api-bagaaravel-serializer', function (hooks) {
   })
 
   test('it leaves relationships untouched', function (assert) {
-    class UserSerializer extends JSONAPISerializer.extend(
-      JSONAPIBagaaravelSerializerMixin
-    ) {}
+    class UserSerializer extends JSONAPISerializer {
+      keyForRelationship () {
+        return keyForRelationship(...arguments)
+      }
+    }
 
     this.owner.register('serializer:user', UserSerializer)
 
@@ -41,9 +50,11 @@ module('Unit | Mixin | json-api-bagaaravel-serializer', function (hooks) {
   })
 
   test('it classifies the model name', function (assert) {
-    class UserSerializer extends JSONAPISerializer.extend(
-      JSONAPIBagaaravelSerializerMixin
-    ) {}
+    class UserSerializer extends JSONAPISerializer {
+      payloadKeyFromModelName () {
+        return payloadKeyFromModelName(...arguments)
+      }
+    }
 
     this.owner.register('serializer:user', UserSerializer)
 
@@ -55,9 +66,13 @@ module('Unit | Mixin | json-api-bagaaravel-serializer', function (hooks) {
   })
 
   test('it serializes hasMany relationships for new records', function (assert) {
-    class UserSerializer extends JSONAPISerializer.extend(
-      JSONAPIBagaaravelSerializerMixin
-    ) {}
+    class UserSerializer extends JSONAPISerializer {
+      shouldSerializeHasMany () {
+        const superCheck = super.shouldSerializeHasMany(...arguments)
+
+        return shouldSerializeHasMany(superCheck, ...arguments)
+      }
+    }
 
     this.owner.register('serializer:user', UserSerializer)
 
@@ -73,9 +88,13 @@ module('Unit | Mixin | json-api-bagaaravel-serializer', function (hooks) {
   })
 
   test('it serializes hasMany relationships for existing records', function (assert) {
-    class UserSerializer extends JSONAPISerializer.extend(
-      JSONAPIBagaaravelSerializerMixin
-    ) {}
+    class UserSerializer extends JSONAPISerializer {
+      shouldSerializeHasMany () {
+        const superCheck = super.shouldSerializeHasMany(...arguments)
+
+        return shouldSerializeHasMany(superCheck, ...arguments)
+      }
+    }
 
     this.owner.register('serializer:user', UserSerializer)
 
@@ -99,9 +118,13 @@ module('Unit | Mixin | json-api-bagaaravel-serializer', function (hooks) {
       }
     }
 
-    class UserSerializer extends JSONAPISerializer.extend(
-      JSONAPIBagaaravelSerializerMixin
-    ) {}
+    class UserSerializer extends JSONAPISerializer {
+      shouldSerializeHasMany () {
+        const superCheck = super.shouldSerializeHasMany(...arguments)
+
+        return shouldSerializeHasMany(superCheck, ...arguments)
+      }
+    }
 
     this.owner.register('adapter:user', UserAdapter)
     this.owner.register('serializer:user', UserSerializer)
@@ -111,6 +134,7 @@ module('Unit | Mixin | json-api-bagaaravel-serializer', function (hooks) {
     const newProject = store.createRecord('project')
 
     existingUser.projects.addObject(newProject)
+
     await existingUser.save()
   })
 })
