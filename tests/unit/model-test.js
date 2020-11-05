@@ -12,9 +12,12 @@ import createExistingRecord from '../helpers/create-existing-record'
 module('Unit | Model | save-relationship', function (hooks) {
   setupTest(hooks)
 
+  hooks.beforeEach(function () {
+    this.store = this.owner.lookup('service:store')
+  })
+
   test('"saveRelationship" throws when the record is new', function (assert) {
-    const store = this.owner.lookup('service:store')
-    const newUser = store.createRecord('user')
+    const newUser = this.store.createRecord('user')
 
     assert.throws(() => {
       saveRelationship(newUser, 'company')
@@ -22,8 +25,7 @@ module('Unit | Model | save-relationship', function (hooks) {
   })
 
   test('"saveRelationship" throws when the relationship name is not valid', function (assert) {
-    const store = this.owner.lookup('service:store')
-    const existingUser = createExistingRecord(store, 'user')
+    const existingUser = createExistingRecord(this.store, 'user')
 
     assert.throws(() => {
       saveRelationship(existingUser, 'invalid-relationship-name')
@@ -41,8 +43,7 @@ module('Unit | Model | save-relationship', function (hooks) {
 
     this.owner.register('serializer:user', UserSerializer)
 
-    const store = this.owner.lookup('service:store')
-    const existingUser = createExistingRecord(store, 'user')
+    const existingUser = createExistingRecord(this.store, 'user')
 
     assert.throws(() => {
       saveRelationship(existingUser, 'company')
@@ -65,8 +66,7 @@ module('Unit | Model | save-relationship', function (hooks) {
 
     this.owner.register('adapter:user', UserAdapter)
 
-    const store = this.owner.lookup('service:store')
-    const existingUser = createExistingRecord(store, 'user')
+    const existingUser = createExistingRecord(this.store, 'user')
 
     await saveRelationship(existingUser, relationshipName)
   })
@@ -75,9 +75,12 @@ module('Unit | Model | save-relationship', function (hooks) {
 module('Unit | Model | save-relationships', function (hooks) {
   setupTest(hooks)
 
+  hooks.beforeEach(function () {
+    this.store = this.owner.lookup('service:store')
+  })
+
   test('"saveRelationships" throws when the record is new', function (assert) {
-    const store = this.owner.lookup('service:store')
-    const newUser = store.createRecord('user')
+    const newUser = this.store.createRecord('user')
 
     assert.throws(() => {
       saveRelationships(newUser, 'company', 'projects')
@@ -103,8 +106,7 @@ module('Unit | Model | save-relationships', function (hooks) {
 
     this.owner.register('adapter:user', UserAdapter)
 
-    const store = this.owner.lookup('service:store')
-    const existingUser = createExistingRecord(store, 'user')
+    const existingUser = createExistingRecord(this.store, 'user')
 
     await saveRelationships(existingUser, ...relationshipNames)
   })
