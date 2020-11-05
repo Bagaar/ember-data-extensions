@@ -124,6 +124,6 @@ This project is licensed under the [MIT License](./LICENSE.md).
 
 ## Maintenance
 
-**`@bagaaravel/ember-data-extensions` is built and maintained by [Bagaar](https://bagaar.be).**
+`@bagaaravel/ember-data-extensions` is built and maintained by [Bagaar](https://bagaar.be).
 
 ![Bagaar Logo](https://bagaar.be/hubfs/logo-bagaar-black.svg)
