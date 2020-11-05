@@ -1,9 +1,6 @@
-import RelationshipSupportModelMixin from '@bagaaravel/ember-data-extensions/mixins/relationship-support-model'
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model'
 
-export default class UserModel extends Model.extend(
-  RelationshipSupportModelMixin
-) {
+export default class UserModel extends Model {
   @attr firstName
 
   @belongsTo('company') company

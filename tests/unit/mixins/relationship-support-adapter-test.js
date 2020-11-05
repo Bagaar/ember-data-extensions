@@ -1,4 +1,5 @@
 import RelationshipSupportAdapterMixin from '@bagaaravel/ember-data-extensions/mixins/relationship-support-adapter'
+import { saveRelationship } from '@bagaaravel/ember-data-extensions/model'
 import JSONAPIAdapter from '@ember-data/adapter/json-api'
 import { setupTest } from 'ember-qunit'
 import { module, test } from 'qunit'
@@ -23,7 +24,7 @@ module('Unit | Mixin | relationship-support-adapter', function (hooks) {
     const store = this.owner.lookup('service:store')
     const existingUser = createExistingRecord(store, 'user')
 
-    await existingUser.saveRelationship('projects')
+    await saveRelationship(existingUser, 'projects')
 
     assert.equal(
       urlForUpdateRecord,

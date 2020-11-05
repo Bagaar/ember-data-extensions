@@ -1,5 +1,6 @@
 import JSONAPIBagaaravelSerializerMixin from '@bagaaravel/ember-data-extensions/mixins/json-api-bagaaravel-serializer'
 import RelationshipSupportSerializerMixin from '@bagaaravel/ember-data-extensions/mixins/relationship-support-serializer'
+import { saveRelationship } from '@bagaaravel/ember-data-extensions/model'
 import JSONAPIAdapter from '@ember-data/adapter/json-api'
 import JSONAPISerializer from '@ember-data/serializer/json-api'
 import { setupTest } from 'ember-qunit'
@@ -64,7 +65,7 @@ module('Unit | Mixin | relationship-support-serializer', function (hooks) {
     const store = this.owner.lookup('service:store')
     const existingUser = createExistingRecord(store, 'user')
 
-    await existingUser.saveRelationship('company')
+    await saveRelationship(existingUser, 'company')
 
     assert.deepEqual(serialized, {
       data: null
@@ -74,7 +75,7 @@ module('Unit | Mixin | relationship-support-serializer', function (hooks) {
 
     existingUser.set('company', existingCompany)
 
-    await existingUser.saveRelationship('company')
+    await saveRelationship(existingUser, 'company')
 
     assert.deepEqual(serialized, {
       data: {
@@ -104,7 +105,7 @@ module('Unit | Mixin | relationship-support-serializer', function (hooks) {
     const store = this.owner.lookup('service:store')
     const existingUser = createExistingRecord(store, 'user')
 
-    await existingUser.saveRelationship('projects')
+    await saveRelationship(existingUser, 'projects')
 
     assert.deepEqual(serialized, {
       data: []
@@ -114,7 +115,7 @@ module('Unit | Mixin | relationship-support-serializer', function (hooks) {
 
     existingUser.projects.addObject(existingProject)
 
-    await existingUser.saveRelationship('projects')
+    await saveRelationship(existingUser, 'projects')
 
     assert.deepEqual(serialized, {
       data: [
