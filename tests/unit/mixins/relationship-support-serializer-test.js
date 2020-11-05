@@ -1,11 +1,39 @@
-import JSONAPIBagaaravelSerializerMixin from '@bagaaravel/ember-data-extensions/mixins/json-api-bagaaravel-serializer'
 import RelationshipSupportSerializerMixin from '@bagaaravel/ember-data-extensions/mixins/relationship-support-serializer'
 import { saveRelationship } from '@bagaaravel/ember-data-extensions/model'
+import {
+  keyForAttribute,
+  keyForRelationship,
+  payloadKeyFromModelName,
+  shouldSerializeHasMany
+} from '@bagaaravel/ember-data-extensions/serializer'
 import JSONAPIAdapter from '@ember-data/adapter/json-api'
 import JSONAPISerializer from '@ember-data/serializer/json-api'
 import { setupTest } from 'ember-qunit'
 import { module, test } from 'qunit'
 import createExistingRecord from '../../helpers/create-existing-record'
+
+class UserSerializer extends JSONAPISerializer.extend(
+  {
+    keyForAttribute () {
+      return keyForAttribute(...arguments)
+    },
+
+    keyForRelationship () {
+      return keyForRelationship(...arguments)
+    },
+
+    payloadKeyFromModelName () {
+      return payloadKeyFromModelName(...arguments)
+    },
+
+    shouldSerializeHasMany () {
+      const superCheck = this._super(...arguments)
+
+      return shouldSerializeHasMany(superCheck, ...arguments)
+    }
+  },
+  RelationshipSupportSerializerMixin
+) {}
 
 module('Unit | Mixin | relationship-support-serializer', function (hooks) {
   setupTest(hooks)
@@ -18,11 +46,6 @@ module('Unit | Mixin | relationship-support-serializer', function (hooks) {
         serialized = options.data
       }
     }
-
-    class UserSerializer extends JSONAPISerializer.extend(
-      JSONAPIBagaaravelSerializerMixin,
-      RelationshipSupportSerializerMixin
-    ) {}
 
     this.owner.register('adapter:user', UserAdapter)
     this.owner.register('serializer:user', UserSerializer)
@@ -53,11 +76,6 @@ module('Unit | Mixin | relationship-support-serializer', function (hooks) {
         serialized = options.data
       }
     }
-
-    class UserSerializer extends JSONAPISerializer.extend(
-      JSONAPIBagaaravelSerializerMixin,
-      RelationshipSupportSerializerMixin
-    ) {}
 
     this.owner.register('adapter:user', UserAdapter)
     this.owner.register('serializer:user', UserSerializer)
@@ -93,11 +111,6 @@ module('Unit | Mixin | relationship-support-serializer', function (hooks) {
         serialized = options.data
       }
     }
-
-    class UserSerializer extends JSONAPISerializer.extend(
-      JSONAPIBagaaravelSerializerMixin,
-      RelationshipSupportSerializerMixin
-    ) {}
 
     this.owner.register('adapter:user', UserAdapter)
     this.owner.register('serializer:user', UserSerializer)
