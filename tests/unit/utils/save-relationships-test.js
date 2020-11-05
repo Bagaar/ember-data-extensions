@@ -1,5 +1,5 @@
 import { RELATIONSHIP_ADAPTER_OPTION } from '@bagaaravel/ember-data-extensions/-private/config'
-import saveRelationships from '@bagaaravel/ember-data-extensions/utils/save-relationships'
+import { saveRelationships } from '@bagaaravel/ember-data-extensions/model'
 import JSONAPIAdapter from '@ember-data/adapter/json-api'
 import { setupTest } from 'ember-qunit'
 import { module, test } from 'qunit'

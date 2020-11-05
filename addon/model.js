@@ -2,7 +2,7 @@ import { RELATIONSHIP_ADAPTER_OPTION } from '@bagaaravel/ember-data-extensions/-
 import { getRelationshipDescriptor } from '@bagaaravel/ember-data-extensions/-private/utils'
 import { assert } from '@ember/debug'
 
-export default function saveRelationship (record, relationshipName) {
+export function saveRelationship (record, relationshipName) {
   assert(
     '@bagaaravel/ember-data-extensions: Cannot save a relationship of a newly created record.',
     !record.isNew
@@ -23,6 +23,19 @@ export default function saveRelationship (record, relationshipName) {
       [RELATIONSHIP_ADAPTER_OPTION]: relationshipName
     }
   })
+}
+
+export function saveRelationships (record, ...relationshipNames) {
+  assert(
+    '@bagaaravel/ember-data-extensions: Cannot save relationships of a newly created record.',
+    !record.isNew
+  )
+
+  const promises = relationshipNames.map(relationshipName =>
+    saveRelationship(record, relationshipName)
+  )
+
+  return Promise.all(promises)
 }
 
 function canSerializeRelationship (record, relationshipName) {

@@ -1,5 +1,7 @@
-import saveRelationship from '@bagaaravel/ember-data-extensions/utils/save-relationship'
-import saveRelationships from '@bagaaravel/ember-data-extensions/utils/save-relationships'
+import {
+  saveRelationship,
+  saveRelationships
+} from '@bagaaravel/ember-data-extensions/model'
 import { deprecate } from '@ember/debug'
 import Mixin from '@ember/object/mixin'
 

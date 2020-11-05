@@ -84,10 +84,12 @@ export default class ApplicationSerializer extends JSONAPISerializer.extend(
 Eventually, we can use the `saveRelationship` and `saveRelationships` utils to update relationships via a separate `PATCH` request.
 
 ```javascript
-import saveRelationship from '@bagaaravel/ember-data-extensions/utils/save-relationship'
-import saveRelationships from '@bagaaravel/ember-data-extensions/utils/save-relationships'
+import {
+  saveRelationship,
+  saveRelationships
+} from '@bagaaravel/ember-data-extensions/model'
 
-const user = await store.findRecord('user', '1')
+const user = await this.store.findRecord('user', '1')
 
 saveRelationship(user, 'projects') // Will update the user's projects.
 saveRelationship(user, 'company') // Also works for `belongsTo` relationships.
