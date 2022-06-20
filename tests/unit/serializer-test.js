@@ -52,7 +52,7 @@ module('Unit | Serializer', function (hooks) {
     });
     const serialized = newUser.serialize();
 
-    assert.equal(serialized.data.attributes.first_name, 'First Name');
+    assert.strictEqual(serialized.data.attributes.first_name, 'First Name');
   });
 
   test('keyForRelationship: it leaves relationships untouched', function (assert) {
@@ -70,7 +70,7 @@ module('Unit | Serializer', function (hooks) {
     const newUser = this.store.createRecord('user');
     const serialized = newUser.serialize();
 
-    assert.equal(serialized.data.type, 'User');
+    assert.strictEqual(serialized.data.type, 'User');
   });
 
   test('serialize: saving a record', async function (assert) {
@@ -192,11 +192,13 @@ module('Unit | Serializer', function (hooks) {
   });
 
   test('shouldSerializeHasMany: it does not serialize hasMany relationships for existing records when saving', async function (assert) {
+    let serializedRelationships;
+
     class UserAdapter extends JSONAPIAdapter {
       updateRecord(store, type, snapshot) {
         const serialized = snapshot.record.serialize();
 
-        assert.notOk(serialized.data.relationships);
+        serializedRelationships = serialized.data.relationships;
       }
     }
 
@@ -208,5 +210,7 @@ module('Unit | Serializer', function (hooks) {
     existingUser.projects.addObject(newProject);
 
     await existingUser.save();
+
+    assert.strictEqual(serializedRelationships, undefined);
   });
 });

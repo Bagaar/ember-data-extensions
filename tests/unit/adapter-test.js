@@ -30,6 +30,9 @@ module('Unit | Adapter', function (hooks) {
 
     await saveRelationship(existingUser, 'projects');
 
-    assert.equal(updateUrl, `/users/${existingUser.id}/relationships/projects`);
+    assert.strictEqual(
+      updateUrl,
+      `/users/${existingUser.id}/relationships/projects`
+    );
   });
 });
