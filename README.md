@@ -22,7 +22,7 @@ Ember Data extensions to communicate with the Bagaaravel JSON API implementation
 
 ## Support
 
-`@bagaaravel/ember-data-extensions` supports **Ember v3.16 and up**.
+`@bagaaravel/ember-data-extensions` supports **Ember v3.24 and up**.
 
 ## Installation
 
