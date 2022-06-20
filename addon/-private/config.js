@@ -1,1 +1,1 @@
-export const RELATIONSHIP_ADAPTER_OPTION = 'relationshipName'
+export const RELATIONSHIP_ADAPTER_OPTION = 'relationshipName';

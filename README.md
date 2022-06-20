@@ -1,6 +1,8 @@
 # Bagaaravel Ember Data Extensions
 
-[![NPM Version](https://badge.fury.io/js/%40bagaaravel%2Fember-data-extensions.svg)](https://badge.fury.io/js/%40bagaaravel%2Fember-data-extensions) [![Build Status](https://travis-ci.com/Bagaar/ember-data-extensions.svg?branch=master)](https://travis-ci.com/Bagaar/ember-data-extensions) [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+[![CI](https://github.com/Bagaar/ember-data-extensions/workflows/CI/badge.svg)](https://github.com/Bagaar/ember-data-extensions/actions?query=workflow%3ACI)
+[![Code Style: Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
 Ember Data extensions to communicate with the Bagaaravel JSON API implementation.
 
@@ -20,7 +22,7 @@ Ember Data extensions to communicate with the Bagaaravel JSON API implementation
 
 ## Support
 
-`@bagaaravel/ember-data-extensions` supports **Ember v3.16 and up**.
+`@bagaaravel/ember-data-extensions` supports **Ember v3.24 and up**.
 
 ## Installation
 
@@ -125,5 +127,3 @@ This project is licensed under the [MIT License](./LICENSE.md).
 ## Maintenance
 
 `@bagaaravel/ember-data-extensions` is built and maintained by [Bagaar](https://bagaar.be).
-
-[![Bagaar Logo](https://bagaar.be/hubfs/logo-bagaar-black.svg)](https://bagaar.be)

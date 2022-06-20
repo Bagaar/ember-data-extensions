@@ -1,10 +1,10 @@
-import Model, { attr, belongsTo, hasMany } from '@ember-data/model'
+import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 
 export default class UserModel extends Model {
-  @attr firstName
+  @attr firstName;
 
-  @belongsTo('company') company
+  @belongsTo('company') company;
 
-  @hasMany('project') favoriteProjects
-  @hasMany('project') projects
+  @hasMany('project') favoriteProjects;
+  @hasMany('project') projects;
 }

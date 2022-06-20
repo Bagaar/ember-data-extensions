@@ -1,18 +1,18 @@
-let id = 1
+let id = 1;
 
-export default function createExistingRecord (
+export default function createExistingRecord(
   store,
   modelName,
   inputProperties = {}
 ) {
   const existingRecord = store.createRecord(modelName, {
     ...inputProperties,
-    id
-  })
+    id,
+  });
 
-  id += 1
+  id += 1;
 
-  store.pushPayload(existingRecord.serialize({ includeId: true }))
+  store.pushPayload(existingRecord.serialize({ includeId: true }));
 
-  return existingRecord
+  return existingRecord;
 }
