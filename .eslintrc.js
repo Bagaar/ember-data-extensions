@@ -19,10 +19,7 @@ module.exports = {
   env: {
     browser: true,
   },
-  rules: {
-    'ember/no-mixins': 'off',
-    'ember/no-new-mixins': 'off',
-  },
+  rules: {},
   overrides: [
     // node files
     {
