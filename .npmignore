@@ -16,11 +16,11 @@
 /.eslintrc.js
 /.git/
 /.github/
+/.husky/
 /.gitignore
 /.prettierignore
 /.prettierrc.js
 /.template-lintrc.js
-/.travis.yml
 /.watchmanconfig
 /bower.json
 /config/ember-try.js
