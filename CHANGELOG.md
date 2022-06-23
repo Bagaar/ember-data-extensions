@@ -1,3 +1,10 @@
+## v2.0.0 (2022-06-23)
+
+### 💥 Breaking Changes
+
+- Drop support for Node v12 ([4a435eb](https://github.com/Bagaar/ember-data-extensions/commit/4a435eba018f26800f6beb9816417f0c75a132e0))
+- Drop support for Ember v3.16 and v3.20 ([cdecd37](https://github.com/Bagaar/ember-data-extensions/commit/cdecd371262473ad882c218c32426ef36efa31db))
+
 ## v1.0.0 (2020-11-05)
 
 ### 💥 Breaking Changes
