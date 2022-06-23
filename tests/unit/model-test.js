@@ -5,9 +5,9 @@ import {
 } from '@bagaaravel/ember-data-extensions/model';
 import JSONAPIAdapter from '@ember-data/adapter/json-api';
 import JSONAPISerializer from '@ember-data/serializer/json-api';
-import { setupTest } from 'ember-qunit';
+import { setupTest } from 'dummy/tests/helpers';
+import createExistingRecord from 'dummy/tests/helpers/create-existing-record';
 import { module, test } from 'qunit';
-import createExistingRecord from '../helpers/create-existing-record';
 
 module('Unit | Model', function (hooks) {
   setupTest(hooks);
