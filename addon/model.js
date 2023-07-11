@@ -5,17 +5,17 @@ import { assert } from '@ember/debug';
 export function saveRelationship(record, relationshipName) {
   assert(
     '@bagaaravel/ember-data-extensions: Cannot save a relationship of a newly created record.',
-    !record.isNew
+    !record.isNew,
   );
 
   assert(
     `@bagaaravel/ember-data-extensions: "${relationshipName}" is not a valid relationship name.`,
-    getRelationshipDescriptor(record, relationshipName)
+    getRelationshipDescriptor(record, relationshipName),
   );
 
   assert(
     `@bagaaravel/ember-data-extensions: "${relationshipName}" relationship can not be serialized.`,
-    canSerializeRelationship(record, relationshipName)
+    canSerializeRelationship(record, relationshipName),
   );
 
   return record.save({
@@ -28,11 +28,11 @@ export function saveRelationship(record, relationshipName) {
 export function saveRelationships(record, relationshipNames) {
   assert(
     '@bagaaravel/ember-data-extensions: Cannot save relationships of a newly created record.',
-    !record.isNew
+    !record.isNew,
   );
 
   const promises = relationshipNames.map((relationshipName) =>
-    saveRelationship(record, relationshipName)
+    saveRelationship(record, relationshipName),
   );
 
   return Promise.all(promises);

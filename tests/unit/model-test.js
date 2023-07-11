@@ -83,17 +83,11 @@ module('Unit | Model', function (hooks) {
   test('saveRelationships: it works', async function (assert) {
     const relationshipNames = ['company', 'projects'];
 
-    assert.expect(relationshipNames.length);
-
     class UserAdapter extends JSONAPIAdapter {
       ajax() {}
 
       urlForUpdateRecord(id, modelName, snapshot) {
-        assert.ok(
-          relationshipNames.includes(
-            snapshot.adapterOptions[RELATIONSHIP_ADAPTER_OPTION]
-          )
-        );
+        assert.step(snapshot.adapterOptions[RELATIONSHIP_ADAPTER_OPTION]);
       }
     }
 
@@ -102,5 +96,7 @@ module('Unit | Model', function (hooks) {
     const existingUser = createExistingRecord(this.store, 'user');
 
     await saveRelationships(existingUser, relationshipNames);
+
+    assert.verifySteps(relationshipNames);
   });
 });

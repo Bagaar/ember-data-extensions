@@ -32,7 +32,7 @@ export function serialize(serialized, snapshot) {
 
   const relationshipDescriptor = getRelationshipDescriptor(
     snapshot.record,
-    relationshipName
+    relationshipName,
   );
 
   if (relationshipDescriptor.kind === 'hasMany') {
@@ -50,7 +50,7 @@ export function shouldSerializeHasMany(
   superCheck,
   snapshot,
   key,
-  relationshipDescriptor
+  relationshipDescriptor,
 ) {
   const isRecordNew = snapshot.record.isNew;
   const isRecordSaving = snapshot.record.isSaving;
