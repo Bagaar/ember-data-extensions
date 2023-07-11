@@ -3,7 +3,7 @@ let id = 1;
 export default function createExistingRecord(
   store,
   modelName,
-  inputProperties = {}
+  inputProperties = {},
 ) {
   const existingRecord = store.createRecord(modelName, {
     ...inputProperties,

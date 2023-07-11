@@ -32,7 +32,7 @@ module('Unit | Adapter', function (hooks) {
 
     assert.strictEqual(
       updateUrl,
-      `/users/${existingUser.id}/relationships/projects`
+      `/users/${existingUser.id}/relationships/projects`,
     );
   });
 });
