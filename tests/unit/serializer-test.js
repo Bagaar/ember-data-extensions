@@ -59,7 +59,7 @@ module('Unit | Serializer', function (hooks) {
     const newUser = this.store.createRecord('user');
     const newProject = this.store.createRecord('project');
 
-    newUser.favoriteProjects.addObject(newProject);
+    newUser.favoriteProjects = [...newUser.favoriteProjects, newProject];
 
     const serialized = newUser.serialize();
 
@@ -155,7 +155,7 @@ module('Unit | Serializer', function (hooks) {
 
     const existingProject = createExistingRecord(this.store, 'project');
 
-    existingUser.projects.addObject(existingProject);
+    existingUser.projects = [...existingUser.projects, existingProject];
 
     await saveRelationship(existingUser, 'projects');
 
@@ -173,7 +173,7 @@ module('Unit | Serializer', function (hooks) {
     const newUser = this.store.createRecord('user');
     const newProject = this.store.createRecord('project');
 
-    newUser.projects.addObject(newProject);
+    newUser.projects = [...newUser.projects, newProject];
 
     const serialized = newUser.serialize();
 
@@ -184,7 +184,7 @@ module('Unit | Serializer', function (hooks) {
     const existingUser = createExistingRecord(this.store, 'user');
     const newProject = this.store.createRecord('project');
 
-    existingUser.projects.addObject(newProject);
+    existingUser.projects = [...existingUser.projects, newProject];
 
     const serialized = existingUser.serialize();
 
@@ -207,7 +207,7 @@ module('Unit | Serializer', function (hooks) {
     const existingUser = createExistingRecord(this.store, 'user');
     const newProject = this.store.createRecord('project');
 
-    existingUser.projects.addObject(newProject);
+    existingUser.projects = [...existingUser.projects, newProject];
 
     await existingUser.save();
 
